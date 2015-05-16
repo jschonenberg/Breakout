@@ -13,6 +13,7 @@
 		906F47ED1B07831800BDEB84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 906F47EC1B07831800BDEB84 /* Images.xcassets */; };
 		906F47F01B07831800BDEB84 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906F47EE1B07831800BDEB84 /* LaunchScreen.xib */; };
 		906F47FC1B07831800BDEB84 /* BreakoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F47FB1B07831800BDEB84 /* BreakoutTests.swift */; };
+		906F480E1B07B60C00BDEB84 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		906F47F51B07831800BDEB84 /* BreakoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreakoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		906F47FA1B07831800BDEB84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906F47FB1B07831800BDEB84 /* BreakoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutTests.swift; sourceTree = "<group>"; };
+		906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +79,9 @@
 		906F47E21B07831800BDEB84 /* Breakout */ = {
 			isa = PBXGroup;
 			children = (
-				906F47E51B07831800BDEB84 /* AppDelegate.swift */,
-				906F47E71B07831800BDEB84 /* ViewController.swift */,
 				906F47E91B07831800BDEB84 /* Main.storyboard */,
-				906F47EC1B07831800BDEB84 /* Images.xcassets */,
-				906F47EE1B07831800BDEB84 /* LaunchScreen.xib */,
+				906F47E71B07831800BDEB84 /* ViewController.swift */,
+				906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */,
 				906F47E31B07831800BDEB84 /* Supporting Files */,
 			);
 			path = Breakout;
@@ -90,6 +90,9 @@
 		906F47E31B07831800BDEB84 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				906F47E51B07831800BDEB84 /* AppDelegate.swift */,
+				906F47EE1B07831800BDEB84 /* LaunchScreen.xib */,
+				906F47EC1B07831800BDEB84 /* Images.xcassets */,
 				906F47E41B07831800BDEB84 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -214,6 +217,7 @@
 			files = (
 				906F47E81B07831800BDEB84 /* ViewController.swift in Sources */,
 				906F47E61B07831800BDEB84 /* AppDelegate.swift in Sources */,
+				906F480E1B07B60C00BDEB84 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +415,7 @@
 				906F48011B07831800BDEB84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		906F48021B07831800BDEB84 /* Build configuration list for PBXNativeTarget "BreakoutTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +424,7 @@
 				906F48041B07831800BDEB84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
