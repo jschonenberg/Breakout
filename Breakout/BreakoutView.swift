@@ -10,6 +10,8 @@ import UIKit
 
 class BreakoutView: UIView {
     private struct Constants {
+        static let BallSize = CGSize(width: 20, height: 20)
+        
         static let PaddleSize = CGSize(width: 180.0, height: 15.0)
         static let PaddleBottomMargin: CGFloat = 50.0
         
@@ -25,19 +27,31 @@ class BreakoutView: UIView {
             UIColor(red:0.43, green:0.93, blue:0.43, alpha:1),
             UIColor(red:0.35, green:0.78, blue:0.98, alpha:1)
         ]
-
+        
+        static let selfBoundaryId = "selfBoundary"
+        static let paddleBoundaryId = "paddleBoundary"
     }
+
+    private lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self) }()
+    
+    var behavior = BreakoutBehavior()
+    
+    var collisionDelegate: UICollisionBehaviorDelegate? {
+        get { return behavior.collisionDelegate }
+        set { behavior.collisionDelegate = newValue }
+    }
+    
+    lazy var ball: BallView = {
+        let lazyBall = BallView(frame: CGRect(origin: CGPoint.zeroPoint, size: Constants.BallSize))
+        self.addSubview(lazyBall)
+        self.behavior.addBall(lazyBall)
+        return lazyBall
+        }()
     
     lazy var paddle: PaddleView = {
         let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Constants.PaddleSize))
         self.addSubview(paddle)
         return paddle;
-    }()
-    
-    lazy var ball: BallView = {
-        let ball = BallView(frame: CGRect(origin: CGPoint.zeroPoint, size: CGSize(width: 20, height: 20)))
-        self.addSubview(ball)
-        return ball
     }()
     
     var bricks: [BrickView] = []
@@ -50,21 +64,27 @@ class BreakoutView: UIView {
     }
     
     private func initialize() {
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.blackColor()        
+        animator.addBehavior(behavior)
+        animator.updateItemUsingCurrentState(ball)
+    }
+    
+    override func layoutSubviews() {
+        behavior.addBoundary(UIBezierPath(rect: self.bounds), named: Constants.selfBoundaryId)
     }
     
     func resetPaddle() {
-        if !CGRectContainsRect(self.bounds, paddle.frame) {
             paddle.center = CGPoint(x: self.bounds.midX, y: self.bounds.maxY - paddle.bounds.height - Constants.PaddleBottomMargin)
-        } else {
-            paddle.center = CGPoint(x: paddle.center.x, y: self.bounds.maxY - paddle.bounds.height - Constants.PaddleBottomMargin)
-        }
+
+        
+        behavior.addBoundary(UIBezierPath(rect: paddle.frame), named: Constants.paddleBoundaryId)
     }
     
-    func movePaddle(translation: CGPoint) {
+    func translatePaddle(translation: CGPoint) {
         var origin = paddle.frame.origin
         origin.x = max( min( origin.x + translation.x, self.bounds.maxX - Constants.PaddleSize.width), 0.0)
         paddle.frame.origin = origin
+        behavior.addBoundary(UIBezierPath(rect: paddle.frame), named: Constants.paddleBoundaryId)
     }
     
     func createBricks(arrangement: [[Int]]) {
@@ -89,6 +109,7 @@ class BreakoutView: UIView {
                     let brick = BrickView(frame: frame)
                     brick.backgroundColor = Constants.BrickColors[row % Constants.BrickColors.count]
                     bricks.append(brick)
+                    behavior.addBoundary(UIBezierPath(roundedRect: brick.frame, cornerRadius: brick.layer.cornerRadius), named: (bricks.count-1))
                     addSubview(brick)
                 }
                 
