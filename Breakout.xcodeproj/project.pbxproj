@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9017BEB21B0B7E180019FF69 /* PaddleView.swift */; };
+		9060D3681B0DBAEF0009D8A1 /* BreakoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9060D3671B0DBAEF0009D8A1 /* BreakoutView.swift */; };
+		9060D36A1B0DC3680009D8A1 /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9060D3691B0DC3680009D8A1 /* BallView.swift */; };
+		9060D36E1B0DC7E00009D8A1 /* BreakoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9060D36D1B0DC7E00009D8A1 /* BreakoutBehavior.swift */; };
 		906F47E61B07831800BDEB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F47E51B07831800BDEB84 /* AppDelegate.swift */; };
-		906F47E81B07831800BDEB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F47E71B07831800BDEB84 /* ViewController.swift */; };
+		906F47E81B07831800BDEB84 /* BreakoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F47E71B07831800BDEB84 /* BreakoutViewController.swift */; };
 		906F47EB1B07831800BDEB84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 906F47E91B07831800BDEB84 /* Main.storyboard */; };
 		906F47ED1B07831800BDEB84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 906F47EC1B07831800BDEB84 /* Images.xcassets */; };
 		906F47F01B07831800BDEB84 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 906F47EE1B07831800BDEB84 /* LaunchScreen.xib */; };
 		906F47FC1B07831800BDEB84 /* BreakoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F47FB1B07831800BDEB84 /* BreakoutTests.swift */; };
 		906F480E1B07B60C00BDEB84 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */; };
+		906F48101B07B95500BDEB84 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F480F1B07B95500BDEB84 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,10 +32,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9017BEB21B0B7E180019FF69 /* PaddleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddleView.swift; sourceTree = "<group>"; };
+		9060D3671B0DBAEF0009D8A1 /* BreakoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutView.swift; sourceTree = "<group>"; };
+		9060D3691B0DC3680009D8A1 /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
+		9060D36D1B0DC7E00009D8A1 /* BreakoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutBehavior.swift; sourceTree = "<group>"; };
 		906F47E01B07831800BDEB84 /* Breakout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breakout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		906F47E41B07831800BDEB84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906F47E51B07831800BDEB84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		906F47E71B07831800BDEB84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		906F47E71B07831800BDEB84 /* BreakoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutViewController.swift; sourceTree = "<group>"; };
 		906F47EA1B07831800BDEB84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		906F47EC1B07831800BDEB84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		906F47EF1B07831800BDEB84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -38,6 +47,7 @@
 		906F47FA1B07831800BDEB84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		906F47FB1B07831800BDEB84 /* BreakoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutTests.swift; sourceTree = "<group>"; };
 		906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		906F480F1B07B95500BDEB84 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9060D36B1B0DC6090009D8A1 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				9017BEB21B0B7E180019FF69 /* PaddleView.swift */,
+				9060D3691B0DC3680009D8A1 /* BallView.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		9060D36C1B0DC6120009D8A1 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */,
+				906F480F1B07B95500BDEB84 /* Settings.swift */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
 		906F47D71B07831800BDEB84 = {
 			isa = PBXGroup;
 			children = (
@@ -80,8 +108,11 @@
 			isa = PBXGroup;
 			children = (
 				906F47E91B07831800BDEB84 /* Main.storyboard */,
-				906F47E71B07831800BDEB84 /* ViewController.swift */,
-				906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */,
+				906F47E71B07831800BDEB84 /* BreakoutViewController.swift */,
+				9060D36D1B0DC7E00009D8A1 /* BreakoutBehavior.swift */,
+				9060D3671B0DBAEF0009D8A1 /* BreakoutView.swift */,
+				9060D36B1B0DC6090009D8A1 /* views */,
+				9060D36C1B0DC6120009D8A1 /* settings */,
 				906F47E31B07831800BDEB84 /* Supporting Files */,
 			);
 			path = Breakout;
@@ -215,8 +246,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				906F47E81B07831800BDEB84 /* ViewController.swift in Sources */,
+				906F47E81B07831800BDEB84 /* BreakoutViewController.swift in Sources */,
 				906F47E61B07831800BDEB84 /* AppDelegate.swift in Sources */,
+				9060D36A1B0DC3680009D8A1 /* BallView.swift in Sources */,
+				9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */,
+				9060D3681B0DBAEF0009D8A1 /* BreakoutView.swift in Sources */,
+				906F48101B07B95500BDEB84 /* Settings.swift in Sources */,
+				9060D36E1B0DC7E00009D8A1 /* BreakoutBehavior.swift in Sources */,
 				906F480E1B07B60C00BDEB84 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nUr-0b-mHd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nUr-0b-mHd">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -9,7 +9,7 @@
         <!--Play-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="BreakoutViewController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,9 +17,24 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kh7-Vy-bYF" customClass="BreakoutView" customModule="Breakout" customModuleProvider="target">
+                                <rect key="frame" x="-4" y="20" width="383" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kh7-Vy-bYF" secondAttribute="trailing" constant="-20" id="0Kb-cr-wjp"/>
+                            <constraint firstItem="Kh7-Vy-bYF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="FtF-3R-oQe"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Kh7-Vy-bYF" secondAttribute="bottom" id="cEF-wL-mkw"/>
+                            <constraint firstItem="Kh7-Vy-bYF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="r0O-8x-bcE"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Play" id="Ozc-Ba-1t9"/>
+                    <connections>
+                        <outlet property="breakoutView" destination="Kh7-Vy-bYF" id="Z52-kd-WEX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,18 +51,18 @@
                         <sections>
                             <tableViewSection headerTitle="Paddle" id="YJN-Q4-zvg">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="0AA-NZ-Ih6">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="RmS-5s-GfN">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0AA-NZ-Ih6" id="VYh-86-EXj">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RmS-5s-GfN" id="RG3-W5-zyR">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NV0-o0-Yp4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPi-F2-hWK">
                                                     <rect key="frame" x="8" y="11" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3A5-8p-CLn">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cEZ-ua-ns3">
                                                     <rect key="frame" x="176" y="8" width="191" height="29"/>
                                                     <segments>
                                                         <segment title="Small"/>
@@ -55,15 +70,38 @@
                                                         <segment title="Large"/>
                                                     </segments>
                                                     <connections>
-                                                        <action selector="paddleWidthChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="4Al-jb-mM9"/>
+                                                        <action selector="paddleWidthChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="tLO-Ha-LYs"/>
                                                     </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="3A5-8p-CLn" secondAttribute="centerY" constant="-0.5" id="9Q6-gB-Xam"/>
+                                                <constraint firstAttribute="centerY" secondItem="cEZ-ua-ns3" secondAttribute="centerY" constant="-0.5" id="0lL-zD-b0F"/>
+                                                <constraint firstItem="cEZ-ua-ns3" firstAttribute="trailing" secondItem="RG3-W5-zyR" secondAttribute="trailingMargin" id="Ma4-cM-feL"/>
+                                                <constraint firstAttribute="centerY" secondItem="sPi-F2-hWK" secondAttribute="centerY" id="rFE-9T-0eA"/>
+                                                <constraint firstItem="sPi-F2-hWK" firstAttribute="leading" secondItem="RG3-W5-zyR" secondAttribute="leadingMargin" id="sbN-rl-yb4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="0AA-NZ-Ih6">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0AA-NZ-Ih6" id="VYh-86-EXj">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control by tilting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NV0-o0-Yp4">
+                                                    <rect key="frame" x="8" y="11" width="127" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lqK-n6-tcM">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="NV0-o0-Yp4" secondAttribute="centerY" id="NgM-3m-R1b"/>
                                                 <constraint firstItem="NV0-o0-Yp4" firstAttribute="leading" secondItem="VYh-86-EXj" secondAttribute="leadingMargin" id="b71-Ys-Iq8"/>
-                                                <constraint firstItem="3A5-8p-CLn" firstAttribute="trailing" secondItem="VYh-86-EXj" secondAttribute="trailingMargin" id="iy8-hg-80x"/>
+                                                <constraint firstAttribute="centerY" secondItem="lqK-n6-tcM" secondAttribute="centerY" id="cjA-tp-Wo8"/>
+                                                <constraint firstItem="lqK-n6-tcM" firstAttribute="trailing" secondItem="VYh-86-EXj" secondAttribute="trailingMargin" id="sAC-xm-ZHY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -257,7 +295,6 @@
                         <outlet property="brickColumnsStepper" destination="ZPU-Ms-b2Y" id="LY3-PY-z1c"/>
                         <outlet property="brickRowsLabel" destination="YfG-rH-yyi" id="Usz-g8-pef"/>
                         <outlet property="brickRowsStepper" destination="41N-Y5-Sfd" id="Jy7-zO-fQL"/>
-                        <outlet property="paddleWidthSegmentedControl" destination="3A5-8p-CLn" id="LYG-C7-1Jf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZY-Zc-P82" userLabel="First Responder" sceneMemberID="firstResponder"/>

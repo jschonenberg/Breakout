@@ -21,21 +21,27 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var brickColumnsLabel: UILabel!
     @IBOutlet weak var brickColumnsStepper: UIStepper!
     
-    
     @IBAction func paddleWidthChanged(sender: UISegmentedControl) {
+        
     }
     
     @IBAction func ballCountChanged(sender: UIStepper) {
+        Settings().ballCount = Int(sender.value)
     }
     
     @IBAction func ballSpeedChanged(sender: UISlider) {
+        Settings().ballSpeedModifier = sender.value
     }
     
     @IBAction func brickRowsChanged(sender: UIStepper) {
-        brickRowsLabel.text = "\(Int(sender.value))"
+        let rows = Int(sender.value)
+        Settings().brickRows = rows
+        brickRowsLabel.text = "\(rows)"
     }
     
     @IBAction func brickColumnsChanged(sender: UIStepper) {
-        brickColumnsLabel.text = "\(Int(sender.value))"
+        let columns = Int(sender.value)
+        Settings().brickColumns = columns
+        brickColumnsLabel.text = "\(columns))"
     }
 }
