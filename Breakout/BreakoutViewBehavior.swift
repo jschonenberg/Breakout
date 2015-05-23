@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BreakoutCollisionBehaviorDelegate: UICollisionBehaviorDelegate {
-    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int)
+    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickBoundaryId: Int)
     func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView)
 }
 
@@ -17,7 +17,7 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
     
     var breakoutCollisionDelegate: BreakoutCollisionBehaviorDelegate?
     
-    lazy var collisionBehavior: UICollisionBehavior = {
+    private lazy var collisionBehavior: UICollisionBehavior = {
         let lazyCollisionBehavior = UICollisionBehavior()
         lazyCollisionBehavior.collisionDelegate = self
         
@@ -41,6 +41,10 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
         return lazyBallBehavior
     }()
     
+    private var balls: [BallView] {
+        get { return collisionBehavior.items.filter{$0 is BallView}.map{$0 as! BallView} }
+    }
+    
     override init() {
         super.init()
         addChildBehavior(collisionBehavior)
@@ -50,7 +54,7 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
     func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier boundaryId: NSCopying, atPoint p: CGPoint) {
         if let brickIndex = boundaryId as? Int {
             if let ball = item as? BallView {
-                self.breakoutCollisionDelegate?.ballHitBrick(behavior, ball: ball, brickIndex: brickIndex)
+                self.breakoutCollisionDelegate?.ballHitBrick(behavior, ball: ball, brickBoundaryId: brickIndex)
             }
         }
     }
@@ -62,10 +66,6 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
     
     func removeBoundary (identifier: NSCopying) {
         collisionBehavior.removeBoundaryWithIdentifier(identifier)
-    }
-    
-    var balls: [BallView] {
-        get { return collisionBehavior.items.filter{$0 is BallView}.map{$0 as! BallView} }
     }
     
     func addBall(ball: BallView) {
@@ -80,10 +80,13 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
         ball.removeFromSuperview()
     }
     
-    func launchBall(ball: UIView, magnitude: CGFloat) {
+    func launchBall(ball: UIView, magnitude: CGFloat, minAngle: Int = 0, maxAngle: Int = 360) {
         let pushBehavior = UIPushBehavior(items: [ball], mode: .Instantaneous)
         pushBehavior.magnitude = magnitude
-        pushBehavior.angle = CGFloat(Double(arc4random()) * M_PI * 2 / Double(UINT32_MAX))
+
+        let randomAngle = minAngle + Int( arc4random_uniform( UInt32(maxAngle - minAngle + 1) ) )
+        let randomAngleRad = Double(randomAngle) * M_PI / 180.0
+        pushBehavior.angle = CGFloat(randomAngleRad)
         
         pushBehavior.action = { [weak pushBehavior] in
             if !pushBehavior!.active { self.removeChildBehavior(pushBehavior!) }

@@ -45,7 +45,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
                 breakoutView.addBall()
             }
             
-            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: 0.25)
+            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: 0.05, minAngle: 210, maxAngle: 330)
         }
     }
     
@@ -59,10 +59,10 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         }
     }
     
-    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
-        behavior.removeBoundaryWithIdentifier(brickIndex)
+    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickBoundaryId: Int) {
+        behavior.removeBoundaryWithIdentifier(brickBoundaryId)
             
-        if let brick = breakoutView?.bricks[brickIndex] {
+        if let brick = breakoutView?.bricks[brickBoundaryId] {
             brick.removeFromSuperview()
         }
         

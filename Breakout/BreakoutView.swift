@@ -102,7 +102,7 @@ class BreakoutView: UIView {
     }
     
     func addBall() {
-        let ball = BallView(frame: CGRect(origin: CGPoint(x: paddle.center.x, y: paddle.center.y - 2*Constants.PaddleSize.height), size: Constants.BallSize))
+        let ball = BallView(frame: CGRect(origin: CGPoint(x: paddle.center.x, y: paddle.frame.minY - Constants.BallSize.height), size: Constants.BallSize))
         self.addSubview(ball)
         self.behavior.addBall(ball)
         balls.append(ball)
