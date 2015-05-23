@@ -9,25 +9,22 @@
 import UIKit
 
 protocol BreakoutCollisionBehaviorDelegate: UICollisionBehaviorDelegate {
-    func ballLeftPlayingField(ball: BallView)
+    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int)
+    func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView)
 }
 
-class BreakoutViewBehavior: UIDynamicBehavior {
+class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
     
-    var collisionDelegate: UICollisionBehaviorDelegate? {
-        get { return collisionBehavior.collisionDelegate }
-        set { collisionBehavior.collisionDelegate = newValue }
-    }
+    var breakoutCollisionDelegate: BreakoutCollisionBehaviorDelegate?
     
     lazy var collisionBehavior: UICollisionBehavior = {
         let lazyCollisionBehavior = UICollisionBehavior()
+        lazyCollisionBehavior.collisionDelegate = self
         
         lazyCollisionBehavior.action = {
-            if let delegate = lazyCollisionBehavior.collisionDelegate as? BreakoutCollisionBehaviorDelegate {
-                for ball in self.balls {
-                    if !CGRectIntersectsRect(self.dynamicAnimator!.referenceView!.bounds, ball.frame) {
-                        delegate.ballLeftPlayingField(ball)
-                    }
+            for ball in self.balls {
+                if !CGRectIntersectsRect(self.dynamicAnimator!.referenceView!.bounds, ball.frame) {
+                    self.breakoutCollisionDelegate?.ballLeftPlayingField(lazyCollisionBehavior, ball: ball)
                 }
             }
         }
@@ -48,6 +45,14 @@ class BreakoutViewBehavior: UIDynamicBehavior {
         super.init()
         addChildBehavior(collisionBehavior)
         addChildBehavior(ballBehavior)
+    }
+    
+    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier boundaryId: NSCopying, atPoint p: CGPoint) {
+        if let brickIndex = boundaryId as? Int {
+            if let ball = item as? BallView {
+                self.breakoutCollisionDelegate?.ballHitBrick(behavior, ball: ball, brickIndex: brickIndex)
+            }
+        }
     }
     
     func addBoundary(path: UIBezierPath, named identifier: NSCopying) {

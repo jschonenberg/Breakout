@@ -35,11 +35,6 @@ class BreakoutView: UIView {
     private lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self) }()
     var behavior = BreakoutViewBehavior()
     
-    var collisionDelegate: UICollisionBehaviorDelegate? {
-        get { return behavior.collisionDelegate }
-        set { behavior.collisionDelegate = newValue }
-    }
-    
     lazy var paddle: PaddleView = {
         let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Constants.PaddleSize))
         self.addSubview(paddle)
@@ -107,7 +102,7 @@ class BreakoutView: UIView {
     }
     
     func addBall() {
-        let ball = BallView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Constants.BallSize))
+        let ball = BallView(frame: CGRect(origin: CGPoint(x: paddle.center.x, y: paddle.center.y - 2*Constants.PaddleSize.height), size: Constants.BallSize))
         self.addSubview(ball)
         self.behavior.addBall(ball)
         balls.append(ball)

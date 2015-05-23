@@ -21,7 +21,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         super.viewDidLoad()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-        breakoutView.collisionDelegate = self        
+        breakoutView.behavior.breakoutCollisionDelegate = self
         breakoutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "launchBall:"))
         breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
     }
@@ -59,17 +59,16 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         }
     }
     
-    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier boundaryId: NSCopying, atPoint p: CGPoint) {
-        if let brickIndex = boundaryId as? Int {
-            behavior.removeBoundaryWithIdentifier(brickIndex)
+    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
+        behavior.removeBoundaryWithIdentifier(brickIndex)
             
-            if let brick = breakoutView?.bricks[brickIndex] {
-                brick.removeFromSuperview()
-            }
+        if let brick = breakoutView?.bricks[brickIndex] {
+            brick.removeFromSuperview()
         }
+        
     }
     
-    func ballLeftPlayingField(ball: BallView) {
+    func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView) {
         breakoutView.removeBall(ball)
     }
 }
