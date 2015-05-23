@@ -33,10 +33,6 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        if let level = Settings().level {
-            breakoutView.createBricks(Settings().level!);
-        }
     }
     
     func launchBall(gesture: UITapGestureRecognizer){
@@ -45,7 +41,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
                 breakoutView.addBall()
             }
             
-            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: 0.05, minAngle: 210, maxAngle: 330)
+            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: 0.25, minAngle: 210, maxAngle: 330)
         }
     }
     
@@ -59,13 +55,12 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         }
     }
     
-    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickBoundaryId: Int) {
-        behavior.removeBoundaryWithIdentifier(brickBoundaryId)
-            
-        if let brick = breakoutView?.bricks[brickBoundaryId] {
-            brick.removeFromSuperview()
-        }
+    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
+        breakoutView.removeBrick(brickIndex)
         
+        if breakoutView.bricks.count == 0 {
+            println("NO MORE BRICKS")
+        }
     }
     
     func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView) {

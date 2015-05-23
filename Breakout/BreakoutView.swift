@@ -16,20 +16,12 @@ class BreakoutView: UIView {
         static let BallSize = CGSize(width: 20, height: 20)
         
         static let PaddleSize = CGSize(width: 180.0, height: 15.0)
-        static let PaddleBottomMargin: CGFloat = 50.0
+        static let PaddleBottomMargin: CGFloat = 30.0
         
         static let BrickHeight: CGFloat = 25.0
         static let BrickSpacing: CGFloat = 5.0
         static let BrickTopSpacing: CGFloat = 20.0
         static let BrickSideSpacing: CGFloat = 10.0
-        static let BrickColors = [
-            UIColor(red:1, green:0.28, blue:0.22, alpha:1),
-            UIColor(red:0.99, green:0.42, blue:0.23, alpha:1),
-            UIColor(red:1, green:0.65, blue:0.15, alpha:1),
-            UIColor(red:1, green:0.79, blue:0.17, alpha:1),
-            UIColor(red:0.43, green:0.93, blue:0.43, alpha:1),
-            UIColor(red:0.35, green:0.78, blue:0.98, alpha:1)
-        ]
     }
 
     private lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self) }()
@@ -41,8 +33,8 @@ class BreakoutView: UIView {
         return paddle;
     }()
     
-    var balls: [BallView] = []
-    var bricks: [BrickView] = []
+    var balls = [BallView]()
+    var bricks =  [Int:BrickView]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -83,22 +75,33 @@ class BreakoutView: UIView {
                 let width = (self.bounds.size.width - 2 * Constants.BrickSpacing) / CGFloat(columns)
                 let x = Constants.BrickSpacing + CGFloat(column) * width
                 let y = Constants.BrickTopSpacing + CGFloat(row) * Constants.BrickHeight + CGFloat(row) * Constants.BrickSpacing * 2
-                let color = Constants.BrickColors[row % Constants.BrickColors.count]
-                createBrick(width, x: x, y: y, color: color)
+                let hue = CGFloat(row) / CGFloat(rows)
+                createBrick(width, x: x, y: y, hue: hue)
             }
         }
     }
+
+    func layoutBricks(){
+        
+    }
     
-    func createBrick(width: CGFloat, x: CGFloat, y: CGFloat, color: UIColor) {
+    func createBrick(width: CGFloat, x: CGFloat, y: CGFloat, hue: CGFloat) {
         var frame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: Constants.BrickHeight))
         frame = CGRectInset(frame, Constants.BrickSpacing, 0)
         
         let brick = BrickView(frame: frame)
-        brick.backgroundColor = color
+        println(hue)
+        brick.hue = hue
         addSubview(brick)
         
-        bricks.append(brick)
+        bricks[bricks.count] = brick
         behavior.addBoundary(UIBezierPath(roundedRect: brick.frame, cornerRadius: brick.layer.cornerRadius), named: (bricks.count-1))
+    }
+    
+    func removeBrick(brickIndex: Int) {
+        behavior.removeBoundary(brickIndex)
+        bricks[brickIndex]?.removeFromSuperview()
+        bricks.removeValueForKey(brickIndex)
     }
     
     func addBall() {
@@ -126,9 +129,9 @@ class BreakoutView: UIView {
     
     private func resetPaddlePosition() {
         if !CGRectContainsRect(self.bounds, paddle.frame) {
-            paddle.center = CGPoint(x: self.bounds.midX, y: self.bounds.maxY - paddle.bounds.height)
+            paddle.center = CGPoint(x: self.bounds.midX, y: self.bounds.maxY - paddle.bounds.height - Constants.PaddleBottomMargin)
         } else {
-            paddle.center = CGPoint(x: paddle.center.x, y: self.bounds.maxY - paddle.bounds.height)
+            paddle.center = CGPoint(x: paddle.center.x, y: self.bounds.maxY - paddle.bounds.height - Constants.PaddleBottomMargin)
         }
         
         updatePaddleBoundary()

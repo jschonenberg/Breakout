@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BreakoutCollisionBehaviorDelegate: UICollisionBehaviorDelegate {
-    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickBoundaryId: Int)
+    func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int)
     func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView)
 }
 
@@ -54,7 +54,7 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
     func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier boundaryId: NSCopying, atPoint p: CGPoint) {
         if let brickIndex = boundaryId as? Int {
             if let ball = item as? BallView {
-                self.breakoutCollisionDelegate?.ballHitBrick(behavior, ball: ball, brickBoundaryId: brickIndex)
+                self.breakoutCollisionDelegate?.ballHitBrick(behavior, ball: ball, brickIndex: brickIndex)
             }
         }
     }

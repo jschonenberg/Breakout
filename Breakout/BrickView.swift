@@ -14,6 +14,19 @@ class BrickView: UIView {
         static let defaultBackgroundColor = UIColor.whiteColor()
     }
     
+    var hue : CGFloat {
+        set {
+            self.backgroundColor = UIColor(hue: newValue, saturation: CGFloat(0.65), brightness: CGFloat(0.9), alpha: CGFloat(1.0))
+        } get {
+            var hue: CGFloat = 0.0
+            var saturation: CGFloat = 0.0
+            var brightness: CGFloat = 0.0
+            var alpha: CGFloat = 0.0
+            self.backgroundColor?.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+            return hue
+        }
+    }
+    
     override init (frame : CGRect) {
         super.init(frame : frame)
         setAppearance()
