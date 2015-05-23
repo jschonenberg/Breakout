@@ -59,6 +59,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
+                            <tableViewSection headerTitle="Game" id="mEV-s8-zAb">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="fNB-8o-4ys">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fNB-8o-4ys" id="FOo-Nb-vvW">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Mx-JQ-614">
+                                                    <rect key="frame" x="8" y="8" width="359" height="29"/>
+                                                    <segments>
+                                                        <segment title="Level 1"/>
+                                                        <segment title="Level 2"/>
+                                                        <segment title="Level 3"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="levelChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="mn2-iw-r5g"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7Mx-JQ-614" firstAttribute="trailing" secondItem="FOo-Nb-vvW" secondAttribute="trailingMargin" id="8Ed-74-yWw"/>
+                                                <constraint firstItem="7Mx-JQ-614" firstAttribute="leading" secondItem="FOo-Nb-vvW" secondAttribute="leadingMargin" id="Ep0-Tx-SeP"/>
+                                                <constraint firstAttribute="centerY" secondItem="7Mx-JQ-614" secondAttribute="centerY" id="Ykt-rA-U4F"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Paddle" id="YJN-Q4-zvg">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="RmS-5s-GfN">
@@ -79,9 +107,6 @@
                                                         <segment title="Medium"/>
                                                         <segment title="Large"/>
                                                     </segments>
-                                                    <connections>
-                                                        <action selector="paddleWidthChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="tLO-Ha-LYs"/>
-                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -173,7 +198,7 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-ko-Nw1">
                                                     <rect key="frame" x="45" y="7" width="289" height="31"/>
                                                     <connections>
-                                                        <action selector="ballSpeedChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="UWC-PS-m6d"/>
+                                                        <action selector="ballSpeedModifierChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="WOO-Z7-fRy"/>
                                                     </connections>
                                                 </slider>
                                             </subviews>
@@ -195,121 +220,24 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Bricks" id="ypB-aj-fLc">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="M9N-1x-53S">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M9N-1x-53S" id="fzs-my-JWL">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rows" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnp-Qc-NDX">
-                                                    <rect key="frame" x="8" y="11" width="44" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YfG-rH-yyi">
-                                                    <rect key="frame" x="255" y="11" width="10" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minimumValue="1" maximumValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="41N-Y5-Sfd">
-                                                    <rect key="frame" x="273" y="7" width="94" height="29"/>
-                                                    <connections>
-                                                        <action selector="brickRowsChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="L1H-4G-kdM"/>
-                                                    </connections>
-                                                </stepper>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="YfG-rH-yyi" secondAttribute="centerY" id="5GK-vG-tfC"/>
-                                                <constraint firstAttribute="centerY" secondItem="41N-Y5-Sfd" secondAttribute="centerY" id="5k8-F4-ei3"/>
-                                                <constraint firstItem="41N-Y5-Sfd" firstAttribute="leading" secondItem="YfG-rH-yyi" secondAttribute="trailing" constant="8" id="GG8-Vv-5a2"/>
-                                                <constraint firstAttribute="centerY" secondItem="mnp-Qc-NDX" secondAttribute="centerY" id="P5n-sZ-xj8"/>
-                                                <constraint firstItem="41N-Y5-Sfd" firstAttribute="trailing" secondItem="fzs-my-JWL" secondAttribute="trailingMargin" id="oh6-0n-YMP"/>
-                                                <constraint firstItem="mnp-Qc-NDX" firstAttribute="leading" secondItem="fzs-my-JWL" secondAttribute="leadingMargin" id="yPw-ba-Jog"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="H7d-JT-voR">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H7d-JT-voR" id="tDh-dW-KSn">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columns" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfV-Nq-mVk">
-                                                    <rect key="frame" x="8" y="11" width="69" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minimumValue="4" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZPU-Ms-b2Y">
-                                                    <rect key="frame" x="273" y="7" width="94" height="29"/>
-                                                    <connections>
-                                                        <action selector="brickColumnsChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="yY0-6W-MVs"/>
-                                                    </connections>
-                                                </stepper>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gQ-nG-KVH">
-                                                    <rect key="frame" x="255" y="11" width="10" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ZfV-Nq-mVk" firstAttribute="leading" secondItem="tDh-dW-KSn" secondAttribute="leadingMargin" id="2TF-sY-ZRY"/>
-                                                <constraint firstItem="ZPU-Ms-b2Y" firstAttribute="trailing" secondItem="tDh-dW-KSn" secondAttribute="trailingMargin" id="9Wh-2D-Rfz"/>
-                                                <constraint firstItem="ZPU-Ms-b2Y" firstAttribute="leading" secondItem="4gQ-nG-KVH" secondAttribute="trailing" constant="8" id="KJh-UL-czz"/>
-                                                <constraint firstAttribute="centerY" secondItem="ZPU-Ms-b2Y" secondAttribute="centerY" id="Pyd-25-bQY"/>
-                                                <constraint firstAttribute="centerY" secondItem="4gQ-nG-KVH" secondAttribute="centerY" id="ggc-dA-31h"/>
-                                                <constraint firstAttribute="centerY" secondItem="ZfV-Nq-mVk" secondAttribute="centerY" id="lFV-z7-HyK"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="uZ2-2u-a9S">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uZ2-2u-a9S" id="hrV-Av-oHd">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Special bricks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9P-0M-btr">
-                                                    <rect key="frame" x="8" y="11" width="108" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E5v-OW-ic5">
-                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="g9P-0M-btr" firstAttribute="leading" secondItem="hrV-Av-oHd" secondAttribute="leadingMargin" id="Pbu-8k-TOX"/>
-                                                <constraint firstItem="E5v-OW-ic5" firstAttribute="trailing" secondItem="hrV-Av-oHd" secondAttribute="trailingMargin" id="YQh-4N-8Sv"/>
-                                                <constraint firstAttribute="centerY" secondItem="E5v-OW-ic5" secondAttribute="centerY" id="pVF-4U-ILN"/>
-                                                <constraint firstAttribute="centerY" secondItem="g9P-0M-btr" secondAttribute="centerY" id="uf1-7F-DgX"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="IXQ-gd-KqW" id="Tsc-wQ-d39"/>
                             <outlet property="delegate" destination="IXQ-gd-KqW" id="zAD-Jj-bRY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="Wdf-Ug-l5q"/>
+                    <navigationItem key="navigationItem" title="Settings" id="Riv-Ym-tsp"/>
                     <connections>
                         <outlet property="ballCountLabel" destination="yod-HT-zUt" id="bZS-NC-0wD"/>
                         <outlet property="ballCountStepper" destination="mrJ-dr-IYd" id="RIw-yG-rQi"/>
-                        <outlet property="ballSpeedSlider" destination="s9N-ko-Nw1" id="VSO-xK-Ria"/>
-                        <outlet property="brickColumnsLabel" destination="4gQ-nG-KVH" id="5Zh-8r-vod"/>
-                        <outlet property="brickColumnsStepper" destination="ZPU-Ms-b2Y" id="LY3-PY-z1c"/>
-                        <outlet property="brickRowsLabel" destination="YfG-rH-yyi" id="Usz-g8-pef"/>
-                        <outlet property="brickRowsStepper" destination="41N-Y5-Sfd" id="Jy7-zO-fQL"/>
+                        <outlet property="ballSpeedModifierSlider" destination="s9N-ko-Nw1" id="DHF-8p-eg3"/>
+                        <outlet property="controlByTiltingSwitch" destination="lqK-n6-tcM" id="rhL-Hn-o9f"/>
+                        <outlet property="levelSegmentedControl" destination="7Mx-JQ-614" id="Cbi-mt-JbX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZY-Zc-P82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2058" y="886"/>
+            <point key="canvasLocation" x="2057.5" y="885.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1IZ-gi-1IS">

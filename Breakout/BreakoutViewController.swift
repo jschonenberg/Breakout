@@ -8,12 +8,11 @@
 
 import UIKit
 
-class BreakoutViewController: UIViewController, UICollisionBehaviorDelegate {
-    private let level1 = [[1,0,1,0,1,0,1,0,1],[0,1,0,1,0,1,0,1,0],[1,0,1,0,1,0,1,0,1],[0,1,0,1,0,1,0,1,0],[1,0,1,0,1,0,1,0,1],[0,1,0,1,0,1,0,1,0]]
-    
+class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegate {
     private struct Constants {
         static let gamefieldBoundaryId = "gamefieldBoundary"
         static let paddleBoundaryId = "paddleBoundary"
+        static let maxBalls = 3
     }
     
     @IBOutlet weak var breakoutView: BreakoutView!
@@ -22,21 +21,31 @@ class BreakoutViewController: UIViewController, UICollisionBehaviorDelegate {
         super.viewDidLoad()
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
-        breakoutView.collisionDelegate = self
+        breakoutView.collisionDelegate = self        
         breakoutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "launchBall:"))
         breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        breakoutView.createBricks(Levels.levelThree)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        breakoutView.createBricks(level1);        
-        breakoutView.resetPaddle()
+        if let level = Settings().level {
+            breakoutView.createBricks(Settings().level!);
+        }
     }
     
     func launchBall(gesture: UITapGestureRecognizer){
         if gesture.state == .Ended {
-            breakoutView.behavior.launchBall(breakoutView.ball)
+            if breakoutView.balls.count < Constants.maxBalls {
+                breakoutView.addBall()
+            }
+            
+            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: 0.25)
         }
     }
     
@@ -50,14 +59,17 @@ class BreakoutViewController: UIViewController, UICollisionBehaviorDelegate {
         }
     }
     
-    /* collisiondelegate implementation */
-    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying, atPoint p: CGPoint) {
-        if let index = identifier as? Int {
-            behavior.removeBoundaryWithIdentifier(index)
+    func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier boundaryId: NSCopying, atPoint p: CGPoint) {
+        if let brickIndex = boundaryId as? Int {
+            behavior.removeBoundaryWithIdentifier(brickIndex)
             
-            if let brick = breakoutView?.bricks[index] {
+            if let brick = breakoutView?.bricks[brickIndex] {
                 brick.removeFromSuperview()
             }
         }
+    }
+    
+    func ballLeftPlayingField(ball: BallView) {
+        breakoutView.removeBall(ball)
     }
 }
