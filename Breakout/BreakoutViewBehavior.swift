@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BreakoutCollisionBehaviorDelegate: UICollisionBehaviorDelegate {
+    func ballLeftPlayingField(ball: BallView)
+}
+
 class BreakoutViewBehavior: UIDynamicBehavior {
     
     var collisionDelegate: UICollisionBehaviorDelegate? {
