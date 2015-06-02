@@ -100,8 +100,19 @@ class BreakoutView: UIView {
     
     func removeBrick(brickIndex: Int) {
         behavior.removeBoundary(brickIndex)
-        bricks[brickIndex]?.removeFromSuperview()
+        if let brick = bricks[brickIndex] {
+            UIView.transitionWithView(brick, duration: 0.3, options: .TransitionFlipFromBottom, animations: {
+                brick.alpha = 0.5
+                }, completion: { (success) -> Void in
+                    UIView.animateWithDuration(1.0, animations: {
+                        brick.alpha = 0.0
+                        }, completion: { (success) -> Void in
+                            brick.removeFromSuperview()
+                    })
+            })
+            
         bricks.removeValueForKey(brickIndex)
+        }
     }
     
     func addBall() {
