@@ -12,7 +12,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     private struct Constants {
         static let gamefieldBoundaryId = "gamefieldBoundary"
         static let paddleBoundaryId = "paddleBoundary"
-        static let maxBalls = 3
+        static let maxBalls = 1
     }
     
     @IBOutlet weak var breakoutView: BreakoutView!
@@ -56,10 +56,16 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     }
     
     func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
+        
         breakoutView.removeBrick(brickIndex)
         
-        if breakoutView.bricks.count == 0 {
-            println("NO MORE BRICKS")
+        if breakoutView.bricks.count == 0
+        {
+            breakoutView.removeBall(ball)
+            breakoutView.createBricks(Levels.levelThree)
+            var alert = UIAlertController(title: "Alert", message: "The game is finished!", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
