@@ -29,15 +29,12 @@ class BrickView: UIView {
     
     override init (frame : CGRect) {
         super.init(frame : frame)
-        setAppearance()
+        
+        self.layer.cornerRadius = Constants.cornerRadius
+        self.backgroundColor = Constants.defaultBackgroundColor
     }
     
     required init(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding")
-    }
-    
-    func setAppearance (){
-        self.layer.cornerRadius = Constants.cornerRadius
-        self.backgroundColor = Constants.defaultBackgroundColor
     }
 }

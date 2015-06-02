@@ -19,17 +19,17 @@ class Settings {
     
     // flag which indicates if the settings have been changed
     var HaveChanged: Bool {
-        get { return userDefaults.objectForKey(Keys.Changed) as? Bool ?? false }
-        set { userDefaults.setObject(newValue, forKey: Keys.Changed) }
+        get { return userDefaults.boolForKey(Keys.Changed) ?? false }
+        set { userDefaults.setBool(newValue, forKey: Keys.Changed) }
     }
     
-    var level: [[Int]]? {
-        get { return userDefaults.objectForKey(Keys.Level) as? [[Int]] }
+    var level: [Array<Int>] {
+        get { return (userDefaults.objectForKey(Keys.Level) as? [Array<Int>])! }
         set { userDefaults.setObject(newValue, forKey: Keys.Level) }
     }
     
     var ballSpeedModifier: Float? {
-        get { return userDefaults.objectForKey(Keys.BallSpeedModifier) as? Float }
-        set { userDefaults.setObject(newValue, forKey: Keys.BallSpeedModifier) }
+        get { return userDefaults.floatForKey(Keys.BallSpeedModifier) }
+        set { userDefaults.setFloat(newValue!, forKey: Keys.BallSpeedModifier) }
     }
 }

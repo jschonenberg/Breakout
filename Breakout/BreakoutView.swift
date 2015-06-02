@@ -70,7 +70,7 @@ class BreakoutView: UIView {
             let columns = arrangement[row].count
             
             for column in 0 ..< columns {
-                if arrangement[row][column] == 0 { return }
+                if arrangement[row][column] == 0 { continue }
                 
                 let width = (self.bounds.size.width - 2 * Constants.BrickSpacing) / CGFloat(columns)
                 let x = Constants.BrickSpacing + CGFloat(column) * width
@@ -79,10 +79,6 @@ class BreakoutView: UIView {
                 createBrick(width, x: x, y: y, hue: hue)
             }
         }
-    }
-
-    func layoutBricks(){
-        
     }
     
     func createBrick(width: CGFloat, x: CGFloat, y: CGFloat, hue: CGFloat) {

@@ -12,7 +12,8 @@ public class Levels {
 
 static let levels = [levelOne, levelTwo, levelThree]
     
-static let levelOne =      [[0,1,0,1,0,1,0],
+static let levelOne =      [[1,0,1,0,1,0,1],
+                            [0,1,0,1,0,1,0],
                             [1,0,1,0,1,0,1],
                             [0,1,0,1,0,1,0],
                             [1,0,1,0,1,0,1],
@@ -20,9 +21,9 @@ static let levelOne =      [[0,1,0,1,0,1,0],
                             [1,0,1,0,1,0,1]]
 
 static let levelTwo =      [[1,1,1,1,1,1,1],
-                            [1,0,1,0,1,0,1],
-                            [1,1,0,1,0,1,1],
-                            [1,0,1,0,1,0,1],
+                            [1,1,1,1],
+                            [1,1,1],
+                            [1,1,1,1],
                             [1,1,1,1,1,1,1]]
 
 static let levelThree =    [[1,1,1,1,1,1,1],

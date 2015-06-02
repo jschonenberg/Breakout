@@ -12,7 +12,11 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     private struct Constants {
         static let gamefieldBoundaryId = "gamefieldBoundary"
         static let paddleBoundaryId = "paddleBoundary"
+        
         static let maxBalls = 3
+        static let ballLaunchSpeed = CGFloat(0.25)
+        static let minBallLaunchAngle = 210
+        static let maxBallLaunchAngle = 330
     }
     
     @IBOutlet weak var breakoutView: BreakoutView!
@@ -28,7 +32,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        breakoutView.createBricks(Levels.levelThree)
+        breakoutView.createBricks(Levels.levelOne)
     }
     
     override func viewDidLayoutSubviews() {
@@ -41,7 +45,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
                 breakoutView.addBall()
             }
             
-            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: 0.25, minAngle: 210, maxAngle: 330)
+            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: Constants.ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
         }
     }
     
@@ -57,10 +61,8 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
         breakoutView.removeBrick(brickIndex)
+        breakoutView.description
         
-        if breakoutView.bricks.count == 0 {
-            println("NO MORE BRICKS")
-        }
     }
     
     func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView) {
