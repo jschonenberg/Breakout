@@ -60,6 +60,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     }
     
     func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
+        
         breakoutView.removeBrick(brickIndex)
         breakoutView.description
         
