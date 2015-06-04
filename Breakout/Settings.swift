@@ -18,18 +18,18 @@ class Settings {
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     
     // flag which indicates if the settings have been changed
-    var HaveChanged: Bool {
-        get { return userDefaults.boolForKey(Keys.Changed) ?? false }
-        set { userDefaults.setBool(newValue, forKey: Keys.Changed) }
+    static var HaveChanged: Bool {
+        get { return NSUserDefaults.standardUserDefaults().boolForKey(Keys.Changed) ?? false }
+        set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.Changed) }
     }
     
-    var level: [Array<Int>] {
-        get { return (userDefaults.objectForKey(Keys.Level) as? [Array<Int>])! }
-        set { userDefaults.setObject(newValue, forKey: Keys.Level) }
+    static var level: [Array<Int>] {
+        get { return (NSUserDefaults.standardUserDefaults().objectForKey(Keys.Level) as? [Array<Int>])! }
+        set { NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: Keys.Level) }
     }
     
-    var ballSpeedModifier: Float? {
-        get { return userDefaults.floatForKey(Keys.BallSpeedModifier) }
-        set { userDefaults.setFloat(newValue!, forKey: Keys.BallSpeedModifier) }
+    static var ballSpeedModifier: Float? {
+        get { return NSUserDefaults.standardUserDefaults().floatForKey(Keys.BallSpeedModifier) }
+        set { NSUserDefaults.standardUserDefaults().setFloat(newValue!, forKey: Keys.BallSpeedModifier) }
     }
 }

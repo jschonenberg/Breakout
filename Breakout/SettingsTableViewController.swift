@@ -20,13 +20,9 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var ballSpeedModifierSlider: UISlider!
     
     @IBAction func levelChanged(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex < Levels.levels.count-1 {
-            Settings().level = Levels.levels[sender.selectedSegmentIndex]
-        } else {
-            Settings().level = Levels.levels[0]
-        }
+     Settings.level = Levels.levels[sender.selectedSegmentIndex]
         
-        Settings().HaveChanged = true
+        Settings.HaveChanged = true
     }
     
     @IBAction func ballSpeedModifierChanged(sender: UISlider) {

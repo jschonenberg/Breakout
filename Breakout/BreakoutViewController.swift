@@ -32,7 +32,18 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        breakoutView.createBricks(Levels.levelOne)
+        
+        if Settings.HaveChanged
+        {
+            breakoutView.RemoveAllBricks()
+            breakoutView.createBricks(Settings.level)
+            Settings.HaveChanged = false
+        }
+        else
+        {
+            breakoutView.createBricks(Levels.levelOne)
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {

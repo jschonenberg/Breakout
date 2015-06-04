@@ -118,6 +118,14 @@ class BreakoutView: UIView {
         balls.append(ball)
     }
     
+    func RemoveAllBricks()
+    {
+        for i in 0 ..< bricks.count
+        {
+            removeBrick(i)
+        }
+    }
+    
     func removeBall(ball: BallView){
         self.behavior.removeBall(ball)
         ball.removeFromSuperview()
