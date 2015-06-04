@@ -13,6 +13,7 @@ class Settings {
         static let Changed = "Settings.Changed"
         static let Level = "Settings.Level"
         static let BallSpeedModifier = "Settings.BallSpeedModifier"
+        static let BallCount = "Settings.BallCount"
     }
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -31,5 +32,11 @@ class Settings {
     static var ballSpeedModifier: Float? {
         get { return NSUserDefaults.standardUserDefaults().floatForKey(Keys.BallSpeedModifier) }
         set { NSUserDefaults.standardUserDefaults().setFloat(newValue!, forKey: Keys.BallSpeedModifier) }
+    }
+    
+    static var ballCount: Int?
+    {
+        get { return NSUserDefaults.standardUserDefaults().integerForKey(Keys.BallCount) }
+        set { NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: Keys.BallCount) }
     }
 }

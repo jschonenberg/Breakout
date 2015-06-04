@@ -12,12 +12,12 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     private struct Constants {
         static let gamefieldBoundaryId = "gamefieldBoundary"
         static let paddleBoundaryId = "paddleBoundary"
-        
-        static let maxBalls = 3
         static let ballLaunchSpeed = CGFloat(0.25)
         static let minBallLaunchAngle = 210
         static let maxBallLaunchAngle = 330
     }
+    
+    private var maxBalls = 1
     
     @IBOutlet weak var breakoutView: BreakoutView!
     
@@ -35,6 +35,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         
         if Settings.HaveChanged
         {
+            maxBalls = Settings.ballCount!
             breakoutView.RemoveAllBricks()
             breakoutView.createBricks(Settings.level)
             Settings.HaveChanged = false
@@ -52,7 +53,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func launchBall(gesture: UITapGestureRecognizer){
         if gesture.state == .Ended {
-            if breakoutView.balls.count < Constants.maxBalls {
+            if breakoutView.balls.count < maxBalls {
                 breakoutView.addBall()
             }
             

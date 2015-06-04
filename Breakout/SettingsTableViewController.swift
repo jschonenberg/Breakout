@@ -25,6 +25,13 @@ class SettingsTableViewController: UITableViewController {
         Settings.HaveChanged = true
     }
     
+    @IBAction func ballCountChanged(sender: UIStepper)
+    {
+        Settings.ballCount = Int(ballCountStepper.value)
+        ballCountLabel.text = "\(ballCountStepper.value)"
+        Settings.HaveChanged = true
+    }
+    
     @IBAction func ballSpeedModifierChanged(sender: UISlider) {
     }
 }
