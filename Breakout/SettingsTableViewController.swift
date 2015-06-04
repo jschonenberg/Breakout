@@ -28,7 +28,7 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func ballCountChanged(sender: UIStepper)
     {
         Settings.ballCount = Int(ballCountStepper.value)
-        ballCountLabel.text = "\(ballCountStepper.value)"
+        ballCountLabel.text = "\(Int(ballCountStepper.value))"
         Settings.HaveChanged = true
     }
     
