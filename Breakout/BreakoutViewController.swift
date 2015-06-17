@@ -58,6 +58,8 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             breakoutView.createBricks(Settings.level)
             usedBalls = 0
             setBallsLeftLabel()
+            livesLeft = 3
+            setAmountOfLivesLeftLabel()
             Settings.ResetRequired = false
         }
             
