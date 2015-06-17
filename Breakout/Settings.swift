@@ -10,7 +10,8 @@ import Foundation
 
 class Settings {
     private struct Keys {
-        static let Changed = "Settings.Changed"
+        static let ResetRequired = "Settings.ResetRequired"
+        static let UpdateRequired = "Settings.UpdateRequired"
         static let Level = "Settings.Level"
         static let BallSpeedModifier = "Settings.BallSpeedModifier"
         static let BallCount = "Settings.BallCount"
@@ -18,11 +19,21 @@ class Settings {
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
     
-    // flag which indicates if the settings have been changed
-    static var HaveChanged: Bool {
-        get { return NSUserDefaults.standardUserDefaults().boolForKey(Keys.Changed) ?? false }
-        set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.Changed) }
+    // flag to indicate that a complete reset is required
+    static var ResetRequired: Bool {
+        get { return NSUserDefaults.standardUserDefaults().boolForKey(Keys.ResetRequired) ?? false }
+        set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.ResetRequired) }
     }
+    
+    // flag to indicate that settings can be reloaded without resetting the current progress
+    static var UpdateRequired: Bool {
+        get { return NSUserDefaults.standardUserDefaults().boolForKey(Keys.UpdateRequired) ?? false }
+        set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.UpdateRequired) }
+    }
+    
+    /*
+     *    Actual gameplay variables
+     */
     
     static var level: [Array<Int>] {
         get { return (NSUserDefaults.standardUserDefaults().objectForKey(Keys.Level) as? [Array<Int>])! }

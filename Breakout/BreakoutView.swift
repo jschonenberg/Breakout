@@ -86,7 +86,6 @@ class BreakoutView: UIView {
         frame = CGRectInset(frame, Constants.BrickSpacing, 0)
         
         let brick = BrickView(frame: frame)
-        println(hue)
         brick.hue = hue
         addSubview(brick)
         
@@ -96,6 +95,7 @@ class BreakoutView: UIView {
     
     func removeBrick(brickIndex: Int) {
         behavior.removeBoundary(brickIndex)
+        
         if let brick = bricks[brickIndex] {
             UIView.transitionWithView(brick, duration: 0.3, options: .TransitionFlipFromBottom, animations: {
                 brick.alpha = 0.5
@@ -103,11 +103,12 @@ class BreakoutView: UIView {
                     UIView.animateWithDuration(1.0, animations: {
                         brick.alpha = 0.0
                         }, completion: { (success) -> Void in
+                            print("REMOVING BRICK")
                             brick.removeFromSuperview()
                     })
             })
             
-        bricks.removeValueForKey(brickIndex)
+            bricks.removeValueForKey(brickIndex)
         }
     }
     
@@ -118,12 +119,20 @@ class BreakoutView: UIView {
         balls.append(ball)
     }
     
-    func RemoveAllBricks()
+    func reset()
     {
-        for i in 0 ..< bricks.count
-        {
-            removeBrick(i)
+        // remove all subviews excluding the paddle
+        for view in self.subviews {
+            if view as? PaddleView != paddle {
+                view.removeFromSuperview()
+            }
         }
+        
+        // reset vars
+        behavior.removeAllBoundaries();
+        balls = [BallView]()
+        bricks = [Int:BrickView]()
+        initialize()
     }
     
     func removeBall(ball: BallView){

@@ -22,14 +22,14 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func levelChanged(sender: UISegmentedControl) {
      Settings.level = Levels.levels[sender.selectedSegmentIndex]
         
-        Settings.HaveChanged = true
+        Settings.ResetRequired = true
     }
     
     @IBAction func ballCountChanged(sender: UIStepper)
     {
         Settings.ballCount = Int(ballCountStepper.value)
         ballCountLabel.text = "\(Int(ballCountStepper.value))"
-        Settings.HaveChanged = true
+        Settings.UpdateRequired = true
     }
     
     @IBAction func ballSpeedModifierChanged(sender: UISlider) {

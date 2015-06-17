@@ -51,6 +51,10 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
         addChildBehavior(ballBehavior)
     }
     
+    func removeAllBoundaries() {
+        collisionBehavior.removeAllBoundaries()
+    }
+    
     func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier boundaryId: NSCopying, atPoint p: CGPoint) {
         if let brickIndex = boundaryId as? Int {
             if let ball = item as? BallView {

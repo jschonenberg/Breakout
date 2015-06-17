@@ -13,6 +13,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         static let gamefieldBoundaryId = "gamefieldBoundary"
         static let paddleBoundaryId = "paddleBoundary"
         static let ballLaunchSpeed = CGFloat(0.25)
+        static let ballPushSpeed = CGFloat(0.05)
         static let minBallLaunchAngle = 210
         static let maxBallLaunchAngle = 330
     }
@@ -33,22 +34,33 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if Settings.HaveChanged
-        {
-            maxBalls = Settings.ballCount!
-            breakoutView.RemoveAllBricks()
+        if Settings.ResetRequired {
+            breakoutView.reset()
+            
             breakoutView.createBricks(Settings.level)
-            Settings.HaveChanged = false
+            
+            Settings.ResetRequired = false
         }
-        else
-        {
-            breakoutView.createBricks(Levels.levelOne)
+            
+        if Settings.UpdateRequired {
+            maxBalls = Settings.ballCount!
+            
+            Settings.UpdateRequired = false
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true;
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+        for ball in breakoutView.balls {
+            breakoutView.behavior.launchBall(ball, magnitude: Constants.ballPushSpeed)
+        }
     }
     
     func launchBall(gesture: UITapGestureRecognizer){
