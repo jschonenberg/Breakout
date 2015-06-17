@@ -34,6 +34,11 @@ class BrickView: UIView {
         self.backgroundColor = Constants.defaultBackgroundColor
     }
     
+    convenience init (frame: CGRect, hue: CGFloat) {
+        self.init(frame: frame)
+        self.hue = hue
+    }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding")
     }

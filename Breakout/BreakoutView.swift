@@ -20,21 +20,21 @@ class BreakoutView: UIView {
         
         static let BrickHeight: CGFloat = 25.0
         static let BrickSpacing: CGFloat = 5.0
-        static let BrickTopSpacing: CGFloat = 20.0
+        static let BricksTopSpacing: CGFloat = 20.0
         static let BrickSideSpacing: CGFloat = 10.0
     }
 
     private lazy var animator: UIDynamicAnimator = { UIDynamicAnimator(referenceView: self) }()
     var behavior = BreakoutViewBehavior()
     
+    var balls = [BallView]()
+    var bricks =  [Int:BrickView]()
+    
     lazy var paddle: PaddleView = {
         let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Constants.PaddleSize))
         self.addSubview(paddle)
         return paddle;
     }()
-    
-    var balls = [BallView]()
-    var bricks =  [Int:BrickView]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,6 +59,25 @@ class BreakoutView: UIView {
             animator.updateItemUsingCurrentState(ball)
         }
     }
+    
+    func reset()
+    {
+        // remove all subviews excluding the paddle
+        for view in self.subviews {
+            if view as? PaddleView != paddle {
+                view.removeFromSuperview()
+            }
+        }
+        
+        // reset behavior
+        behavior.removeAllBoundaries();
+        behavior.deregisterAllBalls();
+        
+        // reset vars
+        balls = [BallView]()
+        bricks = [Int:BrickView]()
+        initialize()
+    }
 
     func createBricks(arrangement: [[Int]]) {
         if arrangement.count == 0 { return }    // no rows
@@ -74,7 +93,7 @@ class BreakoutView: UIView {
                 
                 let width = (self.bounds.size.width - 2 * Constants.BrickSpacing) / CGFloat(columns)
                 let x = Constants.BrickSpacing + CGFloat(column) * width
-                let y = Constants.BrickTopSpacing + CGFloat(row) * Constants.BrickHeight + CGFloat(row) * Constants.BrickSpacing * 2
+                let y = Constants.BricksTopSpacing + CGFloat(row) * Constants.BrickHeight + CGFloat(row) * Constants.BrickSpacing * 2
                 let hue = CGFloat(row) / CGFloat(rows)
                 createBrick(width, x: x, y: y, hue: hue)
             }
@@ -85,12 +104,11 @@ class BreakoutView: UIView {
         var frame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: Constants.BrickHeight))
         frame = CGRectInset(frame, Constants.BrickSpacing, 0)
         
-        let brick = BrickView(frame: frame)
-        brick.hue = hue
-        addSubview(brick)
-        
+        let brick = BrickView(frame: frame, hue: hue)
         bricks[bricks.count] = brick
-        behavior.addBoundary(UIBezierPath(roundedRect: brick.frame, cornerRadius: brick.layer.cornerRadius), named: (bricks.count-1))
+        
+        addSubview(brick)
+        behavior.addBoundary( UIBezierPath(roundedRect: brick.frame, cornerRadius: brick.layer.cornerRadius), named: (bricks.count - 1) )
     }
     
     func removeBrick(brickIndex: Int) {
@@ -114,30 +132,15 @@ class BreakoutView: UIView {
     
     func addBall() {
         let ball = BallView(frame: CGRect(origin: CGPoint(x: paddle.center.x, y: paddle.frame.minY - Constants.BallSize.height), size: Constants.BallSize))
-        self.addSubview(ball)
-        self.behavior.addBall(ball)
         balls.append(ball)
-    }
-    
-    func reset()
-    {
-        // remove all subviews excluding the paddle
-        for view in self.subviews {
-            if view as? PaddleView != paddle {
-                view.removeFromSuperview()
-            }
-        }
         
-        // reset vars
-        behavior.removeAllBoundaries();
-        balls = [BallView]()
-        bricks = [Int:BrickView]()
-        initialize()
+        self.addSubview(ball)
+        self.behavior.registerBall(ball)
     }
     
     func removeBall(ball: BallView){
-        self.behavior.removeBall(ball)
         ball.removeFromSuperview()
+        self.behavior.deregisterBall(ball)
         
         if let index = find(balls, ball) {
             balls.removeAtIndex(index)
@@ -145,9 +148,16 @@ class BreakoutView: UIView {
     }
     
     func translatePaddle(translation: CGPoint) {
-        var origin = paddle.frame.origin
-        origin.x = max( min( origin.x + translation.x, self.bounds.maxX - Constants.PaddleSize.width), 0.0) // min = 0, max = maxX - paddle width
-        paddle.frame.origin = origin
+        var newFrame = paddle.frame
+        newFrame.origin.x = max( min(newFrame.origin.x + translation.x, self.bounds.maxX - Constants.PaddleSize.width), 0.0) // min = 0, max = maxX - paddle width
+        
+        for ball in balls {
+            if CGRectContainsRect(newFrame, ball.frame) {
+                return
+            }
+        }
+        
+        paddle.frame = newFrame;
         updatePaddleBoundary()
     }
     

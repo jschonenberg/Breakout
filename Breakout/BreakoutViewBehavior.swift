@@ -72,16 +72,21 @@ class BreakoutViewBehavior: UIDynamicBehavior, UICollisionBehaviorDelegate {
         collisionBehavior.removeBoundaryWithIdentifier(identifier)
     }
     
-    func addBall(ball: BallView) {
-        dynamicAnimator?.referenceView?.addSubview(ball)
+    func registerBall(ball: BallView) {
         collisionBehavior.addItem(ball)
         ballBehavior.addItem(ball)
     }
     
-    func removeBall(ball: BallView) {
+    func deregisterBall(ball: BallView) {
         ballBehavior.removeItem(ball)
         collisionBehavior.removeItem(ball)
-        ball.removeFromSuperview()
+    }
+    
+    func deregisterAllBalls(){
+        for ball in balls {
+            ballBehavior.removeItem(ball)
+            collisionBehavior.removeItem(ball)
+        }
     }
     
     func launchBall(ball: UIView, magnitude: CGFloat, minAngle: Int = 0, maxAngle: Int = 360) {

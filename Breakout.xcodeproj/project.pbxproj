@@ -76,8 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				906F47E71B07831800BDEB84 /* BreakoutViewController.swift */,
-				9060D36D1B0DC7E00009D8A1 /* BreakoutViewBehavior.swift */,
 				9060D3671B0DBAEF0009D8A1 /* BreakoutView.swift */,
+				9060D36D1B0DC7E00009D8A1 /* BreakoutViewBehavior.swift */,
 				90AAB70D1B108C4C00C065FE /* Views */,
 				90283F651B0F4EB400A36D4A /* Levels.swift */,
 			);
