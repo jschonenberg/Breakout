@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9017BEB21B0B7E180019FF69 /* PaddleView.swift */; };
+		901E4F2E1B31B63200AE11B3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901E4F2D1B31B63200AE11B3 /* TabBarController.swift */; };
 		90283F661B0F4EB400A36D4A /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90283F651B0F4EB400A36D4A /* Levels.swift */; };
 		9060D3681B0DBAEF0009D8A1 /* BreakoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9060D3671B0DBAEF0009D8A1 /* BreakoutView.swift */; };
 		9060D36A1B0DC3680009D8A1 /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9060D3691B0DC3680009D8A1 /* BallView.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		9017BEB21B0B7E180019FF69 /* PaddleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddleView.swift; sourceTree = "<group>"; };
+		901E4F2D1B31B63200AE11B3 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		90283F651B0F4EB400A36D4A /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		9060D3671B0DBAEF0009D8A1 /* BreakoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakoutView.swift; sourceTree = "<group>"; };
 		9060D3691B0DC3680009D8A1 /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				906F47E91B07831800BDEB84 /* Main.storyboard */,
+				901E4F2D1B31B63200AE11B3 /* TabBarController.swift */,
 				9060D36B1B0DC6090009D8A1 /* Breakout */,
 				9060D36C1B0DC6120009D8A1 /* Settings */,
 				906F47E31B07831800BDEB84 /* Supporting Files */,
@@ -264,6 +267,7 @@
 			files = (
 				90283F661B0F4EB400A36D4A /* Levels.swift in Sources */,
 				906F47E81B07831800BDEB84 /* BreakoutViewController.swift in Sources */,
+				901E4F2E1B31B63200AE11B3 /* TabBarController.swift in Sources */,
 				906F47E61B07831800BDEB84 /* AppDelegate.swift in Sources */,
 				9060D36A1B0DC3680009D8A1 /* BallView.swift in Sources */,
 				9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */,

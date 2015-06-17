@@ -24,8 +24,6 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
         breakoutView.behavior.breakoutCollisionDelegate = self
         breakoutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "launchBall:"))
         breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
@@ -33,6 +31,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         
         if Settings.ResetRequired {
             breakoutView.reset()
@@ -47,10 +46,6 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             
             Settings.UpdateRequired = false
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
     
     override func canBecomeFirstResponder() -> Bool {
@@ -70,6 +65,12 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             }
             
             breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: Constants.ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
+        }
+    }
+    
+    func pushBalls(){
+        for ball in breakoutView.balls {
+            breakoutView.behavior.launchBall(ball, magnitude: Constants.ballPushSpeed)
         }
     }
     

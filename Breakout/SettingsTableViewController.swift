@@ -19,6 +19,11 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var ballCountStepper: UIStepper!
     @IBOutlet weak var ballSpeedModifierSlider: UISlider!
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = .Default
+    }
+    
     @IBAction func levelChanged(sender: UISegmentedControl) {
      Settings.level = Levels.levels[sender.selectedSegmentIndex]
         

@@ -121,7 +121,6 @@ class BreakoutView: UIView {
                     UIView.animateWithDuration(1.0, animations: {
                         brick.alpha = 0.0
                         }, completion: { (success) -> Void in
-                            print("REMOVING BRICK")
                             brick.removeFromSuperview()
                     })
             })

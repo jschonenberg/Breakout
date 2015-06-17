@@ -252,7 +252,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="1IZ-gi-1IS">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="nUr-0b-mHd" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="nUr-0b-mHd" customClass="TabBarController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
