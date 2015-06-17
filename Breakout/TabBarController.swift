@@ -15,7 +15,7 @@ class TabBarController: UITabBarController {
     }
     
     override func supportedInterfaceOrientations() -> Int {
-        return UIInterfaceOrientation.Portrait.rawValue
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
     }
 
 }

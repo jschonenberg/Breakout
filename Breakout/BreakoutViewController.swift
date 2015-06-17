@@ -73,9 +73,13 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         if gesture.state == .Ended {
             if breakoutView.balls.count < maxBalls {
                 breakoutView.addBall()
+                breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: Constants.ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
+            } else {
+                // give all the balls a light push
+                for ball in breakoutView.balls {
+                    breakoutView.behavior.launchBall(ball, magnitude: Constants.ballPushSpeed)
+                }
             }
-            
-            breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: Constants.ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
         }
     }
     
