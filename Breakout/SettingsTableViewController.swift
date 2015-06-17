@@ -22,6 +22,8 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = .Default
+        self.tabBarController?.tabBar.tintColor = UIColor.blackColor()
+        self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
     }
     
     @IBAction func levelChanged(sender: UISegmentedControl) {

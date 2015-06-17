@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegate {
     private struct Constants {
@@ -20,30 +21,40 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     private var maxBalls = 1
     
+    let motionManager = CMMotionManager()
+    
     @IBOutlet weak var breakoutView: BreakoutView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         breakoutView.behavior.breakoutCollisionDelegate = self
         breakoutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "launchBall:"))
+        
+        // add pan event
         breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
+        
+        // add accelerometer event
+        if motionManager.accelerometerAvailable {
+            motionManager.accelerometerUpdateInterval = 0.01
+            motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: accelerometerUpdateHandler)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
+        self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+        self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
+        
         if Settings.ResetRequired {
             breakoutView.reset()
-            
             breakoutView.createBricks(Settings.level)
-            
             Settings.ResetRequired = false
         }
             
         if Settings.UpdateRequired {
             maxBalls = Settings.ballCount!
-            
             Settings.UpdateRequired = false
         }
     }
@@ -82,6 +93,10 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             gesture.setTranslation(CGPointZero, inView: breakoutView)
         default: break
         }
+    }
+    
+    func accelerometerUpdateHandler(data: CMAccelerometerData!, error: NSError!) -> Void {
+        self.breakoutView.translatePaddle( CGPoint(x: 25.0 * data.acceleration.x, y: 0.0) )
     }
     
     func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
