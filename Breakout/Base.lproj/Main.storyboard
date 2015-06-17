@@ -82,6 +82,7 @@
                     <tabBarItem key="tabBarItem" title="Play" image="controller" id="Ozc-Ba-1t9"/>
                     <connections>
                         <outlet property="amountOfBallsLeft" destination="KDh-K9-sZm" id="i8E-XD-QIT"/>
+                        <outlet property="amountOfLivesLeftLabel" destination="0BY-52-P68" id="6lS-J5-wlt"/>
                         <outlet property="breakoutView" destination="Kh7-Vy-bYF" id="Z52-kd-WEX"/>
                     </connections>
                 </viewController>

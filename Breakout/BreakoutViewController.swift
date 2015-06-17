@@ -21,8 +21,9 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     private var maxBalls = 1
     private var usedBalls = 0
+    private var livesLeft = 3
     @IBOutlet weak var amountOfBallsLeft: UILabel!
-    
+    @IBOutlet weak var amountOfLivesLeftLabel: UILabel!
     
     let motionManager = CMMotionManager()
     
@@ -74,6 +75,15 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         for(var i = 0; i < (maxBalls - usedBalls); ++i)
         {
             amountOfBallsLeft.text! += "⦁";
+        }
+    }
+    
+    func setAmountOfLivesLeftLabel()
+    {
+        amountOfLivesLeftLabel.text! = ""
+        for(var i = 0; i < livesLeft; ++i)
+        {
+            amountOfLivesLeftLabel.text! += "♥︎"
         }
     }
     
@@ -134,12 +144,16 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             usedBalls = 0
             setBallsLeftLabel()
+            livesLeft = 3
+            setAmountOfLivesLeftLabel()
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
     func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView)
     {
+        livesLeft = livesLeft - 1
+        setAmountOfLivesLeftLabel()
         breakoutView.removeBall(ball)
     }
 }
