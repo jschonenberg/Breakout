@@ -132,11 +132,14 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             breakoutView.createBricks(Levels.levelThree)
             var alert = UIAlertController(title: "Alert", message: "The game is finished!", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            usedBalls = 0
+            setBallsLeftLabel()
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
-    func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView) {
+    func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView)
+    {
         breakoutView.removeBall(ball)
     }
 }
