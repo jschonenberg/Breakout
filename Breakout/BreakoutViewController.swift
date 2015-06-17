@@ -20,6 +20,9 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     }
     
     private var maxBalls = 1
+    private var usedBalls = 0
+    @IBOutlet weak var amountOfBallsLeft: UILabel!
+    
     
     let motionManager = CMMotionManager()
     
@@ -29,6 +32,8 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         super.viewDidLoad()
         breakoutView.behavior.breakoutCollisionDelegate = self
         breakoutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "launchBall:"))
+        
+        setBallsLeftLabel()
         
         // add pan event
         breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
@@ -50,12 +55,25 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         if Settings.ResetRequired {
             breakoutView.reset()
             breakoutView.createBricks(Settings.level)
+            usedBalls = 0
+            setBallsLeftLabel()
             Settings.ResetRequired = false
         }
             
         if Settings.UpdateRequired {
             maxBalls = Settings.ballCount!
+            setBallsLeftLabel()
             Settings.UpdateRequired = false
+        }
+    }
+    
+    
+    func setBallsLeftLabel()
+    {
+        amountOfBallsLeft.text! = ""
+        for(var i = 0; i < (maxBalls - usedBalls); ++i)
+        {
+            amountOfBallsLeft.text! += "⦁";
         }
     }
     
@@ -71,7 +89,9 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func launchBall(gesture: UITapGestureRecognizer){
         if gesture.state == .Ended {
-            if breakoutView.balls.count < maxBalls {
+            if usedBalls < maxBalls {
+                usedBalls++;
+                setBallsLeftLabel()
                 breakoutView.addBall()
                 breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: Constants.ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
             } else {
