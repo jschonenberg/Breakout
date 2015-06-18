@@ -99,7 +99,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Game" id="mEV-s8-zAb">
+                            <tableViewSection headerTitle="Level" id="mEV-s8-zAb">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="fNB-8o-4ys">
                                         <rect key="frame" x="0.0" y="113.5" width="375" height="44"/>
@@ -111,10 +111,10 @@
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Mx-JQ-614">
                                                     <rect key="frame" x="8" y="8" width="359" height="29"/>
                                                     <segments>
-                                                        <segment title="Level 1"/>
-                                                        <segment title="Level 2"/>
-                                                        <segment title="Level 3"/>
-                                                        <segment title="QR"/>
+                                                        <segment title="1"/>
+                                                        <segment title="2"/>
+                                                        <segment title="3"/>
+                                                        <segment title="From QR"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="levelChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="mn2-iw-r5g"/>
@@ -125,7 +125,13 @@
                                                 <constraint firstItem="7Mx-JQ-614" firstAttribute="trailing" secondItem="FOo-Nb-vvW" secondAttribute="trailingMargin" id="8Ed-74-yWw"/>
                                                 <constraint firstItem="7Mx-JQ-614" firstAttribute="leading" secondItem="FOo-Nb-vvW" secondAttribute="leadingMargin" id="Ep0-Tx-SeP"/>
                                                 <constraint firstAttribute="centerY" secondItem="7Mx-JQ-614" secondAttribute="centerY" id="Ykt-rA-U4F"/>
+                                                <constraint firstItem="7Mx-JQ-614" firstAttribute="leading" secondItem="FOo-Nb-vvW" secondAttribute="leadingMargin" id="aR5-y7-f4w"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Ep0-Tx-SeP"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -284,11 +290,53 @@
                         <outlet property="ballSpeedModifierSlider" destination="s9N-ko-Nw1" id="DHF-8p-eg3"/>
                         <outlet property="controlByTiltingSwitch" destination="lqK-n6-tcM" id="rhL-Hn-o9f"/>
                         <outlet property="levelSegmentedControl" destination="7Mx-JQ-614" id="Cbi-mt-JbX"/>
+                        <segue destination="Vzc-DQ-4eV" kind="presentation" identifier="startLevelScanner" id="4dv-Sd-jVL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZY-Zc-P82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2057.5" y="885.5"/>
+            <point key="canvasLocation" x="1819.5" y="885.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tx1-P4-EvZ">
+            <objects>
+                <navigationController id="Vzc-DQ-4eV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nSX-dj-MNK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="IGR-JZ-8ql" kind="relationship" relationship="rootViewController" id="Tvy-Ea-fMF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N0j-v2-DT0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2392.5" y="885.5"/>
+        </scene>
+        <!--Scan QR-->
+        <scene sceneID="g71-L8-7HE">
+            <objects>
+                <viewController id="IGR-JZ-8ql" customClass="LevelScannerViewController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mWu-C0-K0b"/>
+                        <viewControllerLayoutGuide type="bottom" id="QCm-AR-DbZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QDS-wN-dnB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Scan QR" id="CIf-Og-tUO">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="FDu-Ev-yed">
+                            <connections>
+                                <action selector="cancel:" destination="IGR-JZ-8ql" id="5ZD-lc-KXD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GP4-vw-2dQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2869.5" y="885.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1IZ-gi-1IS">
