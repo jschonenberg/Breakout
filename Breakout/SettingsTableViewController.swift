@@ -37,6 +37,12 @@ class SettingsTableViewController: UITableViewController {
         Settings.ResetRequired = true
     }
     
+    @IBAction func TiltingChanged(sender: UISwitch)
+    {
+        Settings.tilting = sender.on
+        Settings.ResetRequired = true
+    }
+    
     @IBAction func ballCountChanged(sender: UIStepper)
     {
         Settings.ballCount = Int(ballCountStepper.value)

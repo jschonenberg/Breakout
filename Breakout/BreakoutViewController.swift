@@ -33,16 +33,22 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         super.viewDidLoad()
         breakoutView.behavior.breakoutCollisionDelegate = self
         breakoutView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "launchBall:"))
-        
         setBallsLeftLabel()
-        
-        // add pan event
-        breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
-        
-        // add accelerometer event
-        if motionManager.accelerometerAvailable {
-            motionManager.accelerometerUpdateInterval = 0.01
-            motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: accelerometerUpdateHandler)
+        ActivateAccelorometer()
+    }
+    
+    func ActivateAccelorometer()
+    {
+        if(Settings.tilting == true)
+        {
+            // add pan event
+            breakoutView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "panPaddle:"))
+            
+            // add accelerometer event
+            if motionManager.accelerometerAvailable {
+                motionManager.accelerometerUpdateInterval = 0.01
+                motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue(), withHandler: accelerometerUpdateHandler)
+            }
         }
     }
     
@@ -78,6 +84,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         livesLeft = 3
         setBallsLeftLabel()
         setAmountOfLivesLeftLabel()
+        ActivateAccelorometer()
     }
     
     func setBallsLeftLabel()

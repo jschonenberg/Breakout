@@ -16,6 +16,7 @@ class Settings {
         static let BallSpeedModifier = "Settings.BallSpeedModifier"
         static let BallCount = "Settings.BallCount"
         static let PaddleWidth = "Settings.PaddleWidth"
+        static let Accelorometer = "Settings.Accelorometer"
     }
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -56,6 +57,13 @@ class Settings {
     {
         get{ return NSUserDefaults.standardUserDefaults().integerForKey(Keys.PaddleWidth)}
         set{ NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: Keys.PaddleWidth)}
+        
+    }
+    
+    static var tilting: Bool
+    {
+        get{ return NSUserDefaults.standardUserDefaults().boolForKey(Keys.Accelorometer)}
+        set{ NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.Accelorometer)}
         
     }
 }
