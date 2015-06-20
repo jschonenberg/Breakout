@@ -9,6 +9,14 @@
 import Foundation
 
 class Settings {
+    private struct Defaults {
+        static let Level = Levels.levelOne
+        static let BallSpeedModifier = Float(0.5)
+        static let MaxBalls = 3
+        static let PaddleWidth = PaddleWidthPercentage.Medium
+        static let ControlWithTilt = false
+    }
+    
     private struct Keys {
         static let ResetRequired = "Settings.ResetRequired"
         static let UpdateRequired = "Settings.UpdateRequired"
@@ -27,43 +35,42 @@ class Settings {
         set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.ResetRequired) }
     }
     
-    // flag to indicate that settings can be reloaded without resetting the current progress
-    static var UpdateRequired: Bool {
-        get { return NSUserDefaults.standardUserDefaults().boolForKey(Keys.UpdateRequired) ?? false }
-        set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.UpdateRequired) }
-    }
-    
     /*
      *    Actual gameplay variables
      */
     
     static var level: [Array<Int>] {
-        get { return (NSUserDefaults.standardUserDefaults().objectForKey(Keys.Level) as? [Array<Int>])! }
+        get { return (NSUserDefaults.standardUserDefaults().objectForKey(Keys.Level) as? [Array<Int>]) ?? Defaults.Level}
         set { NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: Keys.Level) }
     }
     
-    static var ballSpeedModifier: Float? {
-        get { return NSUserDefaults.standardUserDefaults().floatForKey(Keys.BallSpeedModifier) }
-        set { NSUserDefaults.standardUserDefaults().setFloat(newValue!, forKey: Keys.BallSpeedModifier) }
+    static var ballSpeedModifier: Float {
+        get { return NSUserDefaults.standardUserDefaults().floatForKey(Keys.BallSpeedModifier) ?? Defaults.BallSpeedModifier }
+        set { NSUserDefaults.standardUserDefaults().setFloat(newValue, forKey: Keys.BallSpeedModifier) }
     }
     
-    static var ballCount: Int?
+    static var ballCount: Int
     {
-        get { return NSUserDefaults.standardUserDefaults().integerForKey(Keys.BallCount) }
-        set { NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: Keys.BallCount) }
+        get { return NSUserDefaults.standardUserDefaults().integerForKey(Keys.BallCount) ?? Defaults.MaxBalls }
+        set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: Keys.BallCount) }
     }
     
-    static var paddleWidth: Int?
+    static var paddleWidth: Int
     {
-        get{ return NSUserDefaults.standardUserDefaults().integerForKey(Keys.PaddleWidth)}
-        set{ NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: Keys.PaddleWidth)}
+        get{ return NSUserDefaults.standardUserDefaults().integerForKey(Keys.PaddleWidth) ?? Defaults.PaddleWidth}
+        set{ NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: Keys.PaddleWidth)}
         
     }
     
-    static var tilting: Bool
+    static var controlWithTilt: Bool
     {
-        get{ return NSUserDefaults.standardUserDefaults().boolForKey(Keys.Accelorometer)}
+        get{ return NSUserDefaults.standardUserDefaults().boolForKey(Keys.Accelorometer) ?? Defaults.ControlWithTilt}
         set{ NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.Accelorometer)}
-        
     }
+}
+
+struct PaddleWidthPercentage {
+    static let Small = 20
+    static let Medium = 35
+    static let Large = 50
 }

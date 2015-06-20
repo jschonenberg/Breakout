@@ -27,20 +27,11 @@ class BreakoutView: UIView {
     var bricks =  [Int:BrickView]()
     
     lazy var paddle: PaddleView = {
-        let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Paddles.PaddleSize))
+        let frame = CGRect(x: -1, y: -1, width: Int(self.bounds.size.width), height: 15)
+        let paddle = PaddleView(frame: frame)
         self.addSubview(paddle)
         return paddle;
-        }()
-    
-    func ResetPaddle()
-    {
-        paddle = {
-            let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Paddles.PaddleSize))
-            self.addSubview(paddle)
-            return paddle;
-            }()
-        resetPaddlePosition()
-    }
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,6 +50,8 @@ class BreakoutView: UIView {
         playingFieldBounds.size.height *= 2.0
         behavior.addBoundary(UIBezierPath(rect: playingFieldBounds), named: Constants.selfBoundaryId)
         
+        
+        setPaddleWidth(paddleWidthPercentage)
         resetPaddlePosition()
         
         for ball in balls {
@@ -82,7 +75,6 @@ class BreakoutView: UIView {
         // reset vars
         balls = [BallView]()
         bricks = [Int:BrickView]()
-        ResetPaddle()
         initialize()
     }
 
@@ -153,9 +145,16 @@ class BreakoutView: UIView {
         }
     }
     
+    var paddleWidthPercentage = 33
+    
+    func setPaddleWidth(percentageOfGamefield: Int) {
+        paddleWidthPercentage = percentageOfGamefield
+        paddle.bounds.size.width = self.bounds.size.width / 100.0 * CGFloat(paddleWidthPercentage)
+    }
+    
     func translatePaddle(translation: CGPoint) {
         var newFrame = paddle.frame
-        newFrame.origin.x = max( min(newFrame.origin.x + translation.x, self.bounds.maxX - Paddles.PaddleSize.width), 0.0) // min = 0, max = maxX - paddle width
+        newFrame.origin.x = max( min(newFrame.origin.x + translation.x, self.bounds.maxX - paddle.bounds.size.width), 0.0) // min = 0, max = maxX - paddle width
         
         for ball in balls {
             if CGRectContainsRect(newFrame, ball.frame) {

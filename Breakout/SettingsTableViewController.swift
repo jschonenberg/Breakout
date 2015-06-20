@@ -11,8 +11,10 @@ import UIKit
 class SettingsTableViewController: UITableViewController {
 
     @IBOutlet weak var levelSegmentedControl: UISegmentedControl!
-    
+
     @IBOutlet weak var paddleWidthSegmentedControl: UISegmentedControl!
+    
+    
     @IBOutlet weak var controlByTiltingSwitch: UISwitch!
     
     @IBOutlet weak var ballCountLabel: UILabel!
@@ -24,12 +26,30 @@ class SettingsTableViewController: UITableViewController {
         UIApplication.sharedApplication().statusBarStyle = .Default
         self.tabBarController?.tabBar.tintColor = UIColor.blackColor()
         self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
+        
+        ballSpeedModifierSlider.value = Settings.ballSpeedModifier
+        controlByTiltingSwitch.on = Settings.controlWithTilt
+        ballCountStepper.value = Double(Settings.ballCount)
+        ballCountLabel.text = "\(Int(ballCountStepper.value))"
+        
+        levelSegmentedControl.selectedSegmentIndex = Levels.levels.find { $0 == Settings.level } ?? (levelSegmentedControl.numberOfSegments - 1)
+        
+        switch(Settings.paddleWidth){
+        case PaddleWidths.Small: paddleWidthSegmentedControl.selectedSegmentIndex = 0
+        case PaddleWidths.Medium: paddleWidthSegmentedControl.selectedSegmentIndex = 1
+        case PaddleWidths.Large: paddleWidthSegmentedControl.selectedSegmentIndex = 2
+        default: paddleWidthSegmentedControl.selectedSegmentIndex = 1
+        }
     }
     
     @IBAction func PaddleWidthChanged(sender: UISegmentedControl)
     {
-        Settings.paddleWidth = sender.selectedSegmentIndex
-        Settings.ResetRequired = true
+        switch sender.selectedSegmentIndex {
+        case 0: Settings.paddleWidth = PaddleWidths.Small
+        case 1: Settings.paddleWidth = PaddleWidths.Medium
+        case 2: Settings.paddleWidth = PaddleWidths.Large
+        default: Settings.paddleWidth = PaddleWidths.Medium
+        }
     }
     
     @IBAction func levelChanged(sender: UISegmentedControl) {
@@ -39,20 +59,23 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func TiltingChanged(sender: UISwitch)
     {
-        Settings.tilting = sender.on
-        Settings.ResetRequired = true
+        Settings.controlWithTilt = sender.on
     }
     
     @IBAction func ballCountChanged(sender: UIStepper)
     {
         Settings.ballCount = Int(ballCountStepper.value)
         ballCountLabel.text = "\(Int(ballCountStepper.value))"
-        Settings.UpdateRequired = true
     }
     
     @IBAction func ballSpeedModifierChanged(sender: UISlider)
     {
         Settings.ballSpeedModifier = ballSpeedModifierSlider.value
-        Settings.ResetRequired = true
     }
+}
+
+private struct PaddleWidths {
+    static let Small = 20
+    static let Medium = 33
+    static let Large = 50
 }
