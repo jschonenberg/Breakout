@@ -245,8 +245,8 @@
                                                         <constraint firstAttribute="width" secondItem="Afj-Z7-Jsz" secondAttribute="height" multiplier="1:1" id="r2S-nN-Nlk"/>
                                                     </constraints>
                                                 </imageView>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-ko-Nw1">
-                                                    <rect key="frame" x="45" y="7" width="289" height="31"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.10000000000000001" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-ko-Nw1">
+                                                    <rect key="frame" x="43" y="7" width="289" height="31"/>
                                                     <connections>
                                                         <action selector="ballSpeedModifierChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="WOO-Z7-fRy"/>
                                                     </connections>

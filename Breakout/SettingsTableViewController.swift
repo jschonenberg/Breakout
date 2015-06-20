@@ -41,6 +41,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func ballSpeedModifierChanged(sender: UISlider)
     {
-        
+        Settings.ballSpeedModifier = ballSpeedModifierSlider.value
+        Settings.ResetRequired = true
     }
 }

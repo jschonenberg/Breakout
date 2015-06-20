@@ -13,12 +13,12 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     private struct Constants {
         static let gamefieldBoundaryId = "gamefieldBoundary"
         static let paddleBoundaryId = "paddleBoundary"
-        static let ballLaunchSpeed = CGFloat(0.25)
         static let ballPushSpeed = CGFloat(0.05)
         static let minBallLaunchAngle = 210
         static let maxBallLaunchAngle = 330
     }
     
+    private var ballLaunchSpeed = CGFloat(Settings.ballSpeedModifier!)
     private var maxBalls = Settings.ballCount!
     private var usedBalls = 0
     private var livesLeft = 3
@@ -72,6 +72,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func ResetGame()
     {
+        ballLaunchSpeed = CGFloat(Settings.ballSpeedModifier!)
         breakoutView.reset()
         breakoutView.createBricks(Settings.level)
         usedBalls = 0
@@ -130,7 +131,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
                 usedBalls++;
                 setBallsLeftLabel()
                 breakoutView.addBall()
-                breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: Constants.ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
+                breakoutView.behavior.launchBall(breakoutView.balls.last!, magnitude: ballLaunchSpeed, minAngle: Constants.minBallLaunchAngle, maxAngle: Constants.maxBallLaunchAngle)
             } else {
                 // give all the balls a light push
                 for ball in breakoutView.balls {
