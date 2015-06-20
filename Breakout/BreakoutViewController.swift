@@ -171,6 +171,13 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     {
         livesLeft = livesLeft - 1
         setAmountOfLivesLeftLabel()
+        if(usedBalls == maxBalls)
+        {
+            ShowAlertMessage("GameOver", messagestring: "You have no more balls left!")
+            breakoutView.reset()
+            breakoutView.createBricks(Levels.levelOne)
+        }
+        
         breakoutView.removeBall(ball)
     }
 }
