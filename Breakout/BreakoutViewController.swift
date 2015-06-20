@@ -83,11 +83,28 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     func setAmountOfLivesLeftLabel()
     {
         amountOfLivesLeftLabel.text! = ""
-        for(var i = 0; i < livesLeft; ++i)
+        if(livesLeft == 0)
         {
-            amountOfLivesLeftLabel.text! += "♥︎"
+            ShowAlertMessage("GameOver", messagestring: "You have no more lives left!")
+            breakoutView.reset()
+            breakoutView.createBricks(Levels.levelOne)
+        }
+        else
+        {
+            for(var i = 0; i < livesLeft; ++i)
+            {
+                amountOfLivesLeftLabel.text! += "♥︎"
+            }
         }
     }
+    
+    func ShowAlertMessage(titlestring: String, messagestring: String)
+    {
+        var alert = UIAlertController(title: titlestring, message: messagestring, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     
     override func canBecomeFirstResponder() -> Bool {
         return true;
@@ -142,13 +159,11 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         {
             breakoutView.reset()
             breakoutView.createBricks(Levels.levelThree)
-            var alert = UIAlertController(title: "Alert", message: "The game is finished!", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            ShowAlertMessage("Congratulations", messagestring: "You beat the game!")
             usedBalls = 0
             setBallsLeftLabel()
             livesLeft = 3
             setAmountOfLivesLeftLabel()
-            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
