@@ -49,7 +49,6 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
         self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
         

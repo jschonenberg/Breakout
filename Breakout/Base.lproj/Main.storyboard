@@ -151,6 +151,9 @@
                                                         <segment title="Medium"/>
                                                         <segment title="Large"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="PaddleWidthChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="WkD-ey-Xa5"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>

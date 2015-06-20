@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28CCA41F1B3594F700C55E8F /* Paddles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CCA41E1B3594F700C55E8F /* Paddles.swift */; };
 		9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9017BEB21B0B7E180019FF69 /* PaddleView.swift */; };
 		901E4F2E1B31B63200AE11B3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901E4F2D1B31B63200AE11B3 /* TabBarController.swift */; };
 		90283F661B0F4EB400A36D4A /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90283F651B0F4EB400A36D4A /* Levels.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28CCA41E1B3594F700C55E8F /* Paddles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paddles.swift; sourceTree = "<group>"; };
 		9017BEB21B0B7E180019FF69 /* PaddleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddleView.swift; sourceTree = "<group>"; };
 		901E4F2D1B31B63200AE11B3 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		90283F651B0F4EB400A36D4A /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */,
 				906F480F1B07B95500BDEB84 /* Settings.swift */,
+				28CCA41E1B3594F700C55E8F /* Paddles.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				901E4F2E1B31B63200AE11B3 /* TabBarController.swift in Sources */,
 				906F47E61B07831800BDEB84 /* AppDelegate.swift in Sources */,
 				9060D36A1B0DC3680009D8A1 /* BallView.swift in Sources */,
+				28CCA41F1B3594F700C55E8F /* Paddles.swift in Sources */,
 				9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */,
 				9060D3681B0DBAEF0009D8A1 /* BreakoutView.swift in Sources */,
 				90F1CBE21B0E6B9E00338D12 /* BrickView.swift in Sources */,

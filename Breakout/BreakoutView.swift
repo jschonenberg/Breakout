@@ -12,12 +12,8 @@ class BreakoutView: UIView {
     private struct Constants {
         static let selfBoundaryId = "selfBoundary"
         static let paddleBoundaryId = "paddleBoundary"
-        
         static let BallSize = CGSize(width: 20, height: 20)
-        
-        static let PaddleSize = CGSize(width: 180.0, height: 15.0)
         static let PaddleBottomMargin: CGFloat = 30.0
-        
         static let BrickHeight: CGFloat = 25.0
         static let BrickSpacing: CGFloat = 5.0
         static let BricksTopSpacing: CGFloat = 20.0
@@ -31,10 +27,20 @@ class BreakoutView: UIView {
     var bricks =  [Int:BrickView]()
     
     lazy var paddle: PaddleView = {
-        let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Constants.PaddleSize))
+        let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Paddles.PaddleSize))
         self.addSubview(paddle)
         return paddle;
-    }()
+        }()
+    
+    func ResetPaddle()
+    {
+        paddle = {
+            let paddle = PaddleView(frame: CGRect(origin: CGPoint(x: -1, y: -1), size: Paddles.PaddleSize))
+            self.addSubview(paddle)
+            return paddle;
+            }()
+        resetPaddlePosition()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,6 +82,7 @@ class BreakoutView: UIView {
         // reset vars
         balls = [BallView]()
         bricks = [Int:BrickView]()
+        ResetPaddle()
         initialize()
     }
 
@@ -148,7 +155,7 @@ class BreakoutView: UIView {
     
     func translatePaddle(translation: CGPoint) {
         var newFrame = paddle.frame
-        newFrame.origin.x = max( min(newFrame.origin.x + translation.x, self.bounds.maxX - Constants.PaddleSize.width), 0.0) // min = 0, max = maxX - paddle width
+        newFrame.origin.x = max( min(newFrame.origin.x + translation.x, self.bounds.maxX - Paddles.PaddleSize.width), 0.0) // min = 0, max = maxX - paddle width
         
         for ball in balls {
             if CGRectContainsRect(newFrame, ball.frame) {

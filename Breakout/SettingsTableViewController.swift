@@ -26,9 +26,14 @@ class SettingsTableViewController: UITableViewController {
         self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
     }
     
+    @IBAction func PaddleWidthChanged(sender: UISegmentedControl)
+    {
+        Settings.paddleWidth = sender.selectedSegmentIndex
+        Settings.ResetRequired = true
+    }
+    
     @IBAction func levelChanged(sender: UISegmentedControl) {
-     Settings.level = Levels.levels[sender.selectedSegmentIndex]
-        
+        Settings.level = Levels.levels[sender.selectedSegmentIndex]
         Settings.ResetRequired = true
     }
     

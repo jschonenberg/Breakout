@@ -15,6 +15,7 @@ class Settings {
         static let Level = "Settings.Level"
         static let BallSpeedModifier = "Settings.BallSpeedModifier"
         static let BallCount = "Settings.BallCount"
+        static let PaddleWidth = "Settings.PaddleWidth"
     }
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -49,5 +50,12 @@ class Settings {
     {
         get { return NSUserDefaults.standardUserDefaults().integerForKey(Keys.BallCount) }
         set { NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: Keys.BallCount) }
+    }
+    
+    static var paddleWidth: Int?
+    {
+        get{ return NSUserDefaults.standardUserDefaults().integerForKey(Keys.PaddleWidth)}
+        set{ NSUserDefaults.standardUserDefaults().setInteger(newValue!, forKey: Keys.PaddleWidth)}
+        
     }
 }
