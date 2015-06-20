@@ -22,6 +22,7 @@
 		906F47FC1B07831800BDEB84 /* BreakoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F47FB1B07831800BDEB84 /* BreakoutTests.swift */; };
 		906F480E1B07B60C00BDEB84 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */; };
 		906F48101B07B95500BDEB84 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F480F1B07B95500BDEB84 /* Settings.swift */; };
+		90A23A741B35DD1C0084D4E2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A23A731B35DD1C0084D4E2 /* Extensions.swift */; };
 		90F1CBE21B0E6B9E00338D12 /* BrickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F1CBE11B0E6B9E00338D12 /* BrickView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		906F47FB1B07831800BDEB84 /* BreakoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakoutTests.swift; sourceTree = "<group>"; };
 		906F480D1B07B60C00BDEB84 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		906F480F1B07B95500BDEB84 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		90A23A731B35DD1C0084D4E2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		90F1CBE11B0E6B9E00338D12 /* BrickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 				9060D36B1B0DC6090009D8A1 /* Breakout */,
 				9060D36C1B0DC6120009D8A1 /* Settings */,
 				906F47E31B07831800BDEB84 /* Supporting Files */,
+				90A23A731B35DD1C0084D4E2 /* Extensions.swift */,
 			);
 			path = Breakout;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				9060D36A1B0DC3680009D8A1 /* BallView.swift in Sources */,
 				9017BEB31B0B7E180019FF69 /* PaddleView.swift in Sources */,
 				9060D3681B0DBAEF0009D8A1 /* BreakoutView.swift in Sources */,
+				90A23A741B35DD1C0084D4E2 /* Extensions.swift in Sources */,
 				90F1CBE21B0E6B9E00338D12 /* BrickView.swift in Sources */,
 				9037AA011B32E046001F649D /* LevelScannerViewController.swift in Sources */,
 				906F48101B07B95500BDEB84 /* Settings.swift in Sources */,
