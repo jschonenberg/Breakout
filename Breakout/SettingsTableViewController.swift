@@ -62,8 +62,14 @@ class SettingsTableViewController: UITableViewController, LevelScannerDelegate {
         Settings.ResetRequired = true
     }
     
-    @IBAction func ballCountChanged(sender: UIStepper) {
-        Settings.ballCount = Int(ballCountStepper.value)
+    @IBAction func TiltingChanged(sender: UISwitch)
+    {
+        Settings.controlWithTilt = sender.on
+    }
+    
+    @IBAction func ballCountChanged(sender: UIStepper)
+    {
+        Settings.maxBalls = Int(ballCountStepper.value)
         ballCountLabel.text = "\(Int(ballCountStepper.value))"
     }
     
