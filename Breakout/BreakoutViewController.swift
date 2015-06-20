@@ -28,29 +28,18 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     private var launchSpeedModifier = Settings.ballSpeedModifier
     
-    private var maxBalls: Int = Settings.ballCount {
-        didSet { amountOfBallsLeft?.text = "⦁".repeat(maxBalls - usedBalls) }
+    private var maxBalls: Int = Settings.maxBalls {
+        didSet { ballsLeftLabel?.text = "⦁".repeat(maxBalls - ballsUsed) }
     }
     
-    private var usedBalls = 0 {
-        didSet { amountOfBallsLeft?.text = "⦁".repeat(maxBalls - usedBalls) }
-    }
-    
-    private var livesLeft = 3 {
-        willSet {
-            amountOfLivesLeftLabel.text = "♥︎".repeat(newValue)
-            
-            if newValue == 0 {
-                showGameEndedAlert(false, message: "You have no more lives left!")
-                ResetGame()
-            }
-        }
+    private var ballsUsed = 0 {
+        didSet { ballsLeftLabel?.text = "⦁".repeat(maxBalls - ballsUsed) }
     }
     
     @IBOutlet weak var breakoutView: BreakoutView!
-    @IBOutlet weak var amountOfBallsLeft: UILabel!
-    @IBOutlet weak var amountOfLivesLeftLabel: UILabel!
+    @IBOutlet weak var ballsLeftLabel: UILabel!
    
+    @IBOutlet weak var scoreLabel: UILabel!
     let motionManager = CMMotionManager()
     
     override func viewDidLoad() {
@@ -84,7 +73,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             motionManager.stopAccelerometerUpdates()
         }
         
-        self.maxBalls = Settings.ballCount
+        self.maxBalls = Settings.maxBalls
         self.launchSpeedModifier = Settings.ballSpeedModifier
         breakoutView.setPaddleWidth(Settings.paddleWidth)
     }
@@ -93,8 +82,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     {
         breakoutView.reset()
         breakoutView.createBricks(Settings.level)
-        usedBalls = 0
-        livesLeft = 3
+        ballsUsed = 0
     }
     
     func showGameEndedAlert(playerWon: Bool, message: String) {
@@ -115,8 +103,8 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func launchBall(gesture: UITapGestureRecognizer){
         if gesture.state == .Ended {
-            if usedBalls < maxBalls {
-                usedBalls++;
+            if ballsUsed < maxBalls {
+                ballsUsed++;
                 breakoutView.addBall()
                 
                 var launchSpeed = Const.minLaunchSpeed + (Const.maxLaunchSpeed - Const.minLaunchSpeed) * CGFloat(launchSpeedModifier)
@@ -158,9 +146,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func ballLeftPlayingField(behavior: UICollisionBehavior, ball: BallView)
     {
-        livesLeft--
-        
-        if(usedBalls == maxBalls) {
+        if(ballsUsed == maxBalls) { // the last ball just left the playing field
             showGameEndedAlert(false, message: "You are out of balls!")
             ResetGame()
         }

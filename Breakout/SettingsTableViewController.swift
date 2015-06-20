@@ -29,7 +29,7 @@ class SettingsTableViewController: UITableViewController {
         
         ballSpeedModifierSlider.value = Settings.ballSpeedModifier
         controlByTiltingSwitch.on = Settings.controlWithTilt
-        ballCountStepper.value = Double(Settings.ballCount)
+        ballCountStepper.value = Double(Settings.maxBalls)
         ballCountLabel.text = "\(Int(ballCountStepper.value))"
         
         levelSegmentedControl.selectedSegmentIndex = Levels.levels.find { $0 == Settings.level } ?? (levelSegmentedControl.numberOfSegments - 1)
@@ -64,7 +64,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func ballCountChanged(sender: UIStepper)
     {
-        Settings.ballCount = Int(ballCountStepper.value)
+        Settings.maxBalls = Int(ballCountStepper.value)
         ballCountLabel.text = "\(Int(ballCountStepper.value))"
     }
     

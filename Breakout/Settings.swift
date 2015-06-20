@@ -19,12 +19,12 @@ class Settings {
     
     private struct Keys {
         static let ResetRequired = "Settings.ResetRequired"
-        static let UpdateRequired = "Settings.UpdateRequired"
+        
         static let Level = "Settings.Level"
         static let BallSpeedModifier = "Settings.BallSpeedModifier"
-        static let BallCount = "Settings.BallCount"
+        static let MaxBalls = "Settings.BallCount"
         static let PaddleWidth = "Settings.PaddleWidth"
-        static let Accelorometer = "Settings.Accelorometer"
+        static let ControlWithTilt = "Settings.ControlWithTilt"
     }
     
     private let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -35,9 +35,7 @@ class Settings {
         set { NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.ResetRequired) }
     }
     
-    /*
-     *    Actual gameplay variables
-     */
+    // gameplay settings
     
     static var level: [Array<Int>] {
         get { return (NSUserDefaults.standardUserDefaults().objectForKey(Keys.Level) as? [Array<Int>]) ?? Defaults.Level}
@@ -49,10 +47,10 @@ class Settings {
         set { NSUserDefaults.standardUserDefaults().setFloat(newValue, forKey: Keys.BallSpeedModifier) }
     }
     
-    static var ballCount: Int
+    static var maxBalls: Int
     {
-        get { return NSUserDefaults.standardUserDefaults().integerForKey(Keys.BallCount) ?? Defaults.MaxBalls }
-        set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: Keys.BallCount) }
+        get { return NSUserDefaults.standardUserDefaults().integerForKey(Keys.MaxBalls) ?? Defaults.MaxBalls }
+        set { NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: Keys.MaxBalls) }
     }
     
     static var paddleWidth: Int
@@ -64,8 +62,8 @@ class Settings {
     
     static var controlWithTilt: Bool
     {
-        get{ return NSUserDefaults.standardUserDefaults().boolForKey(Keys.Accelorometer) ?? Defaults.ControlWithTilt}
-        set{ NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.Accelorometer)}
+        get{ return NSUserDefaults.standardUserDefaults().boolForKey(Keys.ControlWithTilt) ?? Defaults.ControlWithTilt}
+        set{ NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Keys.ControlWithTilt)}
     }
 }
 
