@@ -25,7 +25,7 @@ class LevelScannerViewController : UIViewController, AVCaptureMetadataOutputObje
         super.viewDidLoad()
 
         let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-    
+        
         if let input = AVCaptureDeviceInput.deviceInputWithDevice(device, error: nil) as? AVCaptureDeviceInput {
             session.addInput(input)
         

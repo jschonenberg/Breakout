@@ -109,7 +109,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7Mx-JQ-614">
-                                                    <rect key="frame" x="8" y="8" width="359" height="29"/>
+                                                    <rect key="frame" x="8" y="7" width="359" height="29"/>
                                                     <segments>
                                                         <segment title="1"/>
                                                         <segment title="2"/>
@@ -118,6 +118,8 @@
                                                     </segments>
                                                     <connections>
                                                         <action selector="levelChanged:" destination="IXQ-gd-KqW" eventType="valueChanged" id="mn2-iw-r5g"/>
+                                                        <action selector="levelSegmentedControlClicked:" destination="IXQ-gd-KqW" eventType="touchDown" id="FQk-ws-XQZ"/>
+                                                        <action selector="levelSegmentedControlTouched:" destination="IXQ-gd-KqW" eventType="touchUpInside" id="3UA-lX-Bnd"/>
                                                     </connections>
                                                 </segmentedControl>
                                             </subviews>

@@ -29,14 +29,14 @@ class SettingsTableViewController: UITableViewController, LevelScannerDelegate {
     @IBAction func levelChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 3 {
             performSegueWithIdentifier("startLevelScanner", sender: self)
-        } else {
-            Settings.level = Levels.levels[sender.selectedSegmentIndex]
-            Settings.ResetRequired = true
+            return
         }
+        
+        Settings.level = Levels.levels[sender.selectedSegmentIndex]
+        Settings.ResetRequired = true
     }
     
-    @IBAction func ballCountChanged(sender: UIStepper)
-    {
+    @IBAction func ballCountChanged(sender: UIStepper) {
         Settings.ballCount = Int(ballCountStepper.value)
         ballCountLabel.text = "\(Int(ballCountStepper.value))"
         Settings.UpdateRequired = true
@@ -46,13 +46,14 @@ class SettingsTableViewController: UITableViewController, LevelScannerDelegate {
     }
     
     func LevelScanComplete(level: Array<[Int]>) {
-        println("LevelScanComplete")
         Settings.level = level
         Settings.ResetRequired = true
     }
     
     func LevelScanCancelled() {
-        println("LevelScanCancelled")
+        // level scan cancelled, select level 1 as default
+        levelSegmentedControl.selectedSegmentIndex = 0
+        levelChanged(levelSegmentedControl)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
