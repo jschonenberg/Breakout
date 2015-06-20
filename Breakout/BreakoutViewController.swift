@@ -19,7 +19,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         static let maxBallLaunchAngle = 330
     }
     
-    private var maxBalls = 1
+    private var maxBalls = Settings.ballCount!
     private var usedBalls = 0
     private var livesLeft = 3
     @IBOutlet weak var amountOfBallsLeft: UILabel!
@@ -54,12 +54,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
         
         if Settings.ResetRequired {
-            breakoutView.reset()
-            breakoutView.createBricks(Settings.level)
-            usedBalls = 0
-            setBallsLeftLabel()
-            livesLeft = 3
-            setAmountOfLivesLeftLabel()
+            ResetGame()
             Settings.ResetRequired = false
         }
             
@@ -68,8 +63,22 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
             setBallsLeftLabel()
             Settings.UpdateRequired = false
         }
+        
+        if(!Settings.UpdateRequired && !Settings.ResetRequired)
+        {
+            breakoutView.createBricks(Levels.levelOne)
+        }
     }
     
+    func ResetGame()
+    {
+        breakoutView.reset()
+        breakoutView.createBricks(Settings.level)
+        usedBalls = 0
+        livesLeft = 3
+        setBallsLeftLabel()
+        setAmountOfLivesLeftLabel()
+    }
     
     func setBallsLeftLabel()
     {
@@ -86,8 +95,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         if(livesLeft == 0)
         {
             ShowAlertMessage("GameOver", messagestring: "You have no more lives left!")
-            breakoutView.reset()
-            breakoutView.createBricks(Levels.levelOne)
+            ResetGame()
         }
         else
         {
@@ -157,13 +165,8 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         
         if breakoutView.bricks.count == 0
         {
-            breakoutView.reset()
-            breakoutView.createBricks(Levels.levelThree)
             ShowAlertMessage("Congratulations", messagestring: "You beat the game!")
-            usedBalls = 0
-            setBallsLeftLabel()
-            livesLeft = 3
-            setAmountOfLivesLeftLabel()
+            ResetGame()
         }
     }
     
@@ -174,10 +177,11 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         if(usedBalls == maxBalls)
         {
             ShowAlertMessage("GameOver", messagestring: "You have no more balls left!")
-            breakoutView.reset()
-            breakoutView.createBricks(Levels.levelOne)
+            ResetGame()
         }
-        
-        breakoutView.removeBall(ball)
+        else
+        {
+            breakoutView.removeBall(ball)
+        }
     }
 }

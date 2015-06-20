@@ -39,6 +39,8 @@ class SettingsTableViewController: UITableViewController {
         Settings.UpdateRequired = true
     }
     
-    @IBAction func ballSpeedModifierChanged(sender: UISlider) {
+    @IBAction func ballSpeedModifierChanged(sender: UISlider)
+    {
+        
     }
 }
