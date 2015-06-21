@@ -36,6 +36,11 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         didSet { ballsLeftLabel?.text = "⦁".repeat(maxBalls - ballsUsed) }
     }
     
+    private var score = 0
+    {
+        didSet{ scoreLabel?.text = "\(score)" }
+    }
+    
     @IBOutlet weak var breakoutView: BreakoutView!
     @IBOutlet weak var ballsLeftLabel: UILabel!
    
@@ -83,6 +88,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
         breakoutView.reset()
         breakoutView.createBricks(Settings.level)
         ballsUsed = 0
+        score = 0
     }
     
     func showGameEndedAlert(playerWon: Bool, message: String) {
@@ -137,7 +143,7 @@ class BreakoutViewController: UIViewController, BreakoutCollisionBehaviorDelegat
     
     func ballHitBrick(behavior: UICollisionBehavior, ball: BallView, brickIndex: Int) {
         breakoutView.removeBrick(brickIndex)
-        
+        score++
         if breakoutView.bricks.count == 0 {
             showGameEndedAlert(true, message: "You beat the game!")
             ResetGame()
